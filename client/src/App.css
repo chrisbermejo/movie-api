@@ -1,0 +1,59 @@
+.container {
+    width: 794px;
+}
+
+.wrapper {
+    display: flex;
+    overflow-x: auto;
+    gap: 10px;
+}
+
+.wrapper::-webkit-scrollbar {
+    width: 0 !important
+}
+
+.wrapper a img {
+    width: 149px;
+    height: 220px;
+    text-align: center;
+}
+
+.App-Body {
+    display: flex;
+    flex-direction: column;
+}
+
+#root {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    color: white;
+    background-color: rgb(0, 0, 0);
+}
+
+h1 {
+    color: red;
+}
+
+h2 {
+    /* Adjust the height as needed */
+    background-color: black;
+    /* Change the color if desired */
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+h2::before {
+    content: " ";
+    align-self: flex-start;
+    position: absolute;
+    background-color: red;
+    padding-left: .75rem;
+    height: 100%;
+    width: 1px;
+    margin-left: -1.5rem;
+}
+
+footer {
+    margin: 100px;
+}
