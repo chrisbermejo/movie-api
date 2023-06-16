@@ -1,6 +1,5 @@
 import '../App.css';
 import React, { useEffect, useState } from 'react';
-
 export default function Genres(props) {
 
     async function getGenres() {
@@ -21,8 +20,8 @@ export default function Genres(props) {
                 <h2>{props.genre}</h2>
                 <div className='wrapper'>
                     {movieData.map(movie => (
-                        <a href={movie.link}>
-                            <img key={movie.key} src={movie.image} alt={movie.title}></img>
+                        <a key={movie.key} href={movie.link}>
+                            <img src={movie.image} alt={movie.title} />
                         </a>
                     ))
                     }
@@ -31,4 +30,3 @@ export default function Genres(props) {
         </>
     );
 }
-

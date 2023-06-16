@@ -1,0 +1,116 @@
+.nav-container {
+    max-width: 1280px;
+    display: flex;
+    align-items: center;
+    min-height: 48px;
+}
+
+nav {
+    padding: 4px;
+    background-color: rgba(128, 128, 128, 0.103);
+}
+
+.logo-img {
+    width: 64px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+}
+
+.logo-img-container {
+    padding: 0px 0.75rem 0px 0px;
+}
+
+.imdbpro-container {
+    padding: 0px 0.75rem;
+}
+
+.menu-button-container,
+.watchlist-container,
+.sign-in-container,
+.lang-container {
+    gap: 2px;
+    padding: 0 1rem;
+}
+
+.menu-button-container span,
+.watchlist-container span,
+.sign-in-container span,
+.lang-container span {
+    line-height: 1.15rem;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.search-bar-container {
+    border-radius: .25rem;
+    display: flex;
+    min-height: 32px;
+    background-color: white;
+    font-size: 14px;
+    width: 720px;
+    margin: 0 8px;
+}
+
+
+.search-bar-container div {
+    padding: 0px 5px 0px 5px;
+    display: flex;
+    min-height: 32px;
+    align-items: center;
+    color: black;
+}
+
+.search-bar-container .search-bar-category {
+    padding: 0px 10px 0px 15px;
+    display: flex;
+    min-height: 32px;
+    align-items: center;
+    color: black;
+    font-weight: 550;
+    border-right: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.search-bar-input {
+    flex-grow: 2;
+}
+
+.search-bar-input input {
+    border: 0px;
+    outline: 0px;
+    width: 100%;
+}
+
+.search-bar-container .search-bar-button {
+    padding: 0px 0px 0px 0px;
+}
+
+.search-bar-container .search-bar-button button {
+    border: 0px;
+    background-color: white;
+}
+
+.nav-container-items {
+    min-height: 36px;
+    display: flex;
+    align-items: center;
+}
+
+.whitebar {
+    height: 32px;
+    border: 1px solid white;
+    margin: 0 8px;
+}
+
+.imdbpro-container a {
+    display: flex;
+    align-items: center;
+}
+
+.menu-button-container:hover,
+.watchlist-container:hover,
+.sign-in-container:hover,
+.imdbpro-container:hover {
+    border-radius: 5px;
+    background-color: rgba(255, 255, 255, 0.068);
+}
