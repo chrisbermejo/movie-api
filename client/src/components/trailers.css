@@ -1,0 +1,134 @@
+.trailer-body {
+    display: flex;
+    padding: .5rem 0;
+}
+
+.trailer-container {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 1280px;
+    padding: 0px 0.75rem;
+}
+
+.trailer-container img {
+    height: 478px;
+    width: 849px;
+}
+
+.slide-img-container {
+    height: 100%;
+    padding: 0 .5rem;
+}
+
+.up-next-header {
+    height: 52px;
+}
+
+.up-next-header span {
+    display: block;
+    font-size: 1.25rem;
+    color: rgb(245, 197, 24);
+    font-weight: 600;
+    padding: 0.25rem 0;
+    width: 100%;
+}
+
+.up-next-container {
+    height: 448px;
+    width: 400px;
+    background: linear-gradient(0deg, transparent 0%, transparent 50%, rgba(var(--ipt-baseAlt-shade3-rgb, 18, 18, 18), 0.7) 78%, rgba(var(--ipt-baseAlt-shade3-rgb, 18, 18, 18), 1) 100%);
+}
+
+.up-next-item-img img {
+    width: 88px;
+    height: 130px;
+}
+
+.up-next-item a {
+    padding: 18px 16px 0;
+}
+
+.up-next-item-img {
+    padding-top: 16px;
+    height: 137.234px;
+}
+
+.up-next-item {
+    height: 148px;
+    display: flex;
+    padding: 0 16px;
+}
+
+.up-next-item span {
+    padding: 18px 8px 0;
+}
+
+a:visited,
+a:any-link {
+    color: white;
+    text-decoration: none;
+}
+
+.play-icon-time svg {
+    height: 32px;
+    width: 32px;
+    padding-right: .5rem;
+}
+
+.play-icon-time {
+    display: flex;
+    margin-bottom: 3px;
+    height: 39px;
+}
+
+.play-icon-time .time {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: center;
+    font-size: 14px;
+    color: #b3b3b3;
+}
+
+.play-icon-subheader {
+    font-size: 14px;
+    color: #b3b3b3;
+    line-height: 1.25rem;
+}
+
+.up-next-footer {
+    font-weight: 600;
+    font-size: 19px;
+    padding: 24px 16px 0;
+    display: block;
+}
+
+a.up-next-footer:hover {
+    color: rgb(245, 197, 24);
+}
+
+.up-next-footer span {
+    font-weight: 100;
+}
+
+@media screen and (max-width: 1280px) {
+    .slide-img img {
+        height: 376px;
+        width: 667px;
+    }
+
+    .up-next-item-img img {
+        height: 100px;
+        width: 67px;
+    }
+
+    .up-next-container {
+        width: 329.312px;
+    }
+}
+
+@media screen and (max-width: 1028px) {}
+
+@media screen and (max-width: 1023px) {}
+
+@media screen and (max-width: 600px) {}

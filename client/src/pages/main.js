@@ -1,6 +1,7 @@
 import React from 'react';
 import Genres from '../components/genres';
 import Nav from '../components/nav';
+import Trailers from '../components/trailers';
 import '../App.css';
 
 export default function Search() {
@@ -9,6 +10,7 @@ export default function Search() {
     return (
         <div className="App">
             <Nav />
+            <Trailers />
             <header className="App-header">
                 <h1>Trending in</h1>
             </header>
@@ -17,7 +19,6 @@ export default function Search() {
                     <Genres key={genreItem} genre={genreItem} />
                 ))}
             </div>
-            <footer></footer>
         </div>
     );
 }

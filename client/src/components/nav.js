@@ -1,10 +1,8 @@
 import './nav.css';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import imdbLogo from "../images/imdb-logo.svg";
-import menuIcon from "../images/menu.svg";
 
-export default function Nav() {
-
+export default function getNav() {
     return (
         <nav>
             <div className='nav-container'>
@@ -48,9 +46,7 @@ export default function Nav() {
                         </svg>
                     </a>
                 </div>
-                <div className='nav-container-items'>
-                    <div className='whitebar'></div>
-                </div>
+                <div className='whitebar'></div>
                 <div className='watchlist-container nav-container-items'>
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" role="presentation"><path d="M17 3c1.05 0 1.918.82 1.994 1.851L19 5v16l-7-3-7 3V5c0-1.05.82-1.918 1.851-1.994L7 3h10zm-4 4h-2v3H8v2h3v3h2v-3h3v-2h-3V7z" fill="currentColor"></path></svg>
                     <span>Watchlist</span>

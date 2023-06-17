@@ -17,7 +17,7 @@ router.get('/:genre', (req, res) => {
             let counter = 0;
             $('.lister-item.mode-advanced ').each((index, element) => {
 
-                if (counter > 10) {
+                if (counter >= 2) {
                     return false;
                 }
 

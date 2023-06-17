@@ -1,13 +1,18 @@
-.nav-container {
-    max-width: 1280px;
+nav {
+    padding: 0.25rem;
+    background-color: #0d0d0d;
+    /* margin: 0 auto; */
+    min-height: 3rem;
     display: flex;
-    align-items: center;
-    min-height: 48px;
+
 }
 
-nav {
-    padding: 4px;
-    background-color: rgba(128, 128, 128, 0.103);
+.nav-container {
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    max-width: 1280px;
+    padding: 0px 0.75rem;
 }
 
 .logo-img {
@@ -17,20 +22,27 @@ nav {
     align-items: center;
 }
 
-.logo-img-container {
-    padding: 0px 0.75rem 0px 0px;
+.logo-img-container a {
+    margin-right: .5rem;
 }
 
 .imdbpro-container {
-    padding: 0px 0.75rem;
+    padding: 0px 1rem;
 }
 
 .menu-button-container,
 .watchlist-container,
-.sign-in-container,
-.lang-container {
-    gap: 2px;
+.sign-in-container {
     padding: 0 1rem;
+}
+
+.menu-button-container {
+    gap: 2px;
+}
+
+.lang-container {
+    gap: 0.125rem;
+    padding: 0 .25rem 0 1rem;
 }
 
 .menu-button-container span,
@@ -40,31 +52,45 @@ nav {
     line-height: 1.15rem;
     font-weight: 600;
     font-size: 14px;
+    letter-spacing: .02em;
+}
+
+.sign-in-container span {
+    white-space: nowrap;
+}
+
+.watchlist-container svg {
+    margin-right: .25rem;
+    margin-left: -.375rem;
 }
 
 .search-bar-container {
     border-radius: .25rem;
     display: flex;
-    min-height: 32px;
+    min-height: 2rem;
     background-color: white;
-    font-size: 14px;
-    width: 720px;
-    margin: 0 8px;
+    font-size: 0.875rem;
+    width: 700px;
+    margin: 0 .5rem;
+}
+
+.search-bar-button button {
+    display: flex;
 }
 
 
 .search-bar-container div {
-    padding: 0px 5px 0px 5px;
+    padding: 0px 0.3125rem;
     display: flex;
-    min-height: 32px;
+    min-height: 2rem;
     align-items: center;
     color: black;
 }
 
 .search-bar-container .search-bar-category {
-    padding: 0px 10px 0px 15px;
+    padding: 0px 0.625rem 0px 0.9375rem;
     display: flex;
-    min-height: 32px;
+    min-height: 2rem;
     align-items: center;
     color: black;
     font-weight: 550;
@@ -76,13 +102,13 @@ nav {
 }
 
 .search-bar-input input {
-    border: 0px;
-    outline: 0px;
+    border: 0;
+    outline: 0;
     width: 100%;
 }
 
 .search-bar-container .search-bar-button {
-    padding: 0px 0px 0px 0px;
+    padding: 0;
 }
 
 .search-bar-container .search-bar-button button {
@@ -91,15 +117,15 @@ nav {
 }
 
 .nav-container-items {
-    min-height: 36px;
+    min-height: 2rem;
     display: flex;
     align-items: center;
 }
 
 .whitebar {
-    height: 32px;
-    border: 1px solid white;
-    margin: 0 8px;
+    height: 30px;
+    border: 1px solid rgba(255, 255, 255, 0.24);
+    margin: 0 .5rem;
 }
 
 .imdbpro-container a {
@@ -112,5 +138,86 @@ nav {
 .sign-in-container:hover,
 .imdbpro-container:hover {
     border-radius: 5px;
-    background-color: rgba(255, 255, 255, 0.068);
+    background-color: rgba(255, 255, 255, 0.075);
+}
+
+@media screen and (max-width: 1280px) {
+    .search-bar-container {
+        max-width: 448px;
+    }
+}
+
+@media screen and (max-width: 1028px) {
+    .nav-container {
+        width: 100%;
+        margin: 0;
+    }
+
+    .search-bar-container {
+        width: 100%;
+        max-width: none;
+    }
+
+    /* nav {
+        width: 100vw;
+    } */
+}
+
+@media screen and (max-width: 1023px) {
+
+    .imdbpro-container,
+    .watchlist-container,
+    .menu-button-container span {
+        display: none;
+    }
+
+    .nav-container>.logo-img-container {
+        order: 1;
+    }
+
+    .nav-container>.menu-button-container {
+        order: 0;
+    }
+
+    .nav-container>.search-bar-container {
+        order: 2;
+    }
+
+    .nav-container>.imdbpro-container {
+        order: 3;
+    }
+
+    .nav-container>.whitebar {
+        order: 4;
+    }
+
+    .nav-container>.sign-in-container {
+        order: 5;
+    }
+
+    .nav-container>.lang-container {
+        order: 6;
+    }
+}
+
+@media screen and (max-width: 600px) {
+
+    .whitebar {
+        display: none;
+    }
+
+    .search-bar-container .search-bar-category,
+    .search-bar-container .search-bar-input {
+        display: none;
+    }
+
+    .search-bar-container {
+        justify-content: flex-end;
+        background-color: #0d0d0d;
+    }
+
+    .search-bar-container .search-bar-button button {
+        color: white;
+        background-color: #0d0d0d;
+    }
 }
