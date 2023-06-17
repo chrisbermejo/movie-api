@@ -10,7 +10,7 @@ export default function getTrailers() {
                 <div className='trailer-container' width="849px" height="548px">
                     <div className='slide-img-container'>
                         <div className='slide-img'>
-                            <img src={image1} alt='news' />
+                        <img alt="&quot;What We Do in the Shadows&quot;" class="ipc-image" loading="eager" src="https://m.media-amazon.com/images/M/MV5BYmZkZDRmMWMtODc2Zi00MmIxLThjYTQtYzZiYWUwMWQ0YmZmXkEyXkFqcGdeQXZ3ZXNsZXk@._V1_QL40_QL75_UX500_CR0,0,500,281_.jpg" srcset="https://m.media-amazon.com/images/M/MV5BYmZkZDRmMWMtODc2Zi00MmIxLThjYTQtYzZiYWUwMWQ0YmZmXkEyXkFqcGdeQXZ3ZXNsZXk@._V1_QL40_QL75_UX500_CR0,0,500,281_.jpg 500w, https://m.media-amazon.com/images/M/MV5BYmZkZDRmMWMtODc2Zi00MmIxLThjYTQtYzZiYWUwMWQ0YmZmXkEyXkFqcGdeQXZ3ZXNsZXk@._V1_QL40_QL75_UX750_CR0,0,750,422_.jpg 750w, https://m.media-amazon.com/images/M/MV5BYmZkZDRmMWMtODc2Zi00MmIxLThjYTQtYzZiYWUwMWQ0YmZmXkEyXkFqcGdeQXZ3ZXNsZXk@._V1_QL40_QL75_UX1000_CR0,0,1000,563_.jpg 1000w" sizes="100vw, (min-width: 480px) 68vw, (min-width: 600px) 52vw, (min-width: 1024px) 32vw, (min-width: 1280px) 32vw" width="500"/>
                         </div>
                     </div>
                     <aside>

@@ -8,7 +8,7 @@
     align-items: center;
     margin: 0 auto;
     max-width: 1280px;
-    padding: 0px 0.75rem;
+    /* padding: 0px 0.75rem; */
 }
 
 .trailer-container img {
@@ -111,7 +111,7 @@ a.up-next-footer:hover {
     font-weight: 100;
 }
 
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1279px) {
     .slide-img img {
         height: 376px;
         width: 667px;
