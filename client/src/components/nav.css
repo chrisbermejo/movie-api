@@ -4,6 +4,9 @@ nav {
     /* margin: 0 auto; */
     min-height: 3rem;
     display: flex;
+    align-items: center;
+    font-size: .875rem;
+    line-height: 1.25rem;
 
 }
 
@@ -11,8 +14,9 @@ nav {
     display: flex;
     align-items: center;
     margin: 0 auto;
-    max-width: 1280px;
+    max-width: 1256px;
     padding: 0px 0.75rem;
+    height: 100%;
 }
 
 .logo-img {
@@ -24,6 +28,10 @@ nav {
 
 .logo-img-container a {
     margin-right: .5rem;
+}
+
+.logo-img-container {
+    margin-right: 0.5rem;
 }
 
 .imdbpro-container {
@@ -70,8 +78,12 @@ nav {
     min-height: 2rem;
     background-color: white;
     font-size: 0.875rem;
-    width: 700px;
+    width: 720px;
     margin: 0 .5rem;
+}
+
+.search-bar {
+    width: 100%;
 }
 
 .search-bar-button button {
@@ -148,6 +160,10 @@ nav {
     .search-bar-container {
         max-width: 448px;
     }
+
+    .nav-container {
+        width: 1000px;
+    }
 }
 
 @media screen and (max-width: 1028px) {
@@ -217,6 +233,10 @@ nav {
     .search-bar-container {
         justify-content: flex-end;
         background-color: #0d0d0d;
+    }
+
+    .search-bar {
+        justify-content: flex-end;
     }
 
     .search-bar-container .search-bar-button button {

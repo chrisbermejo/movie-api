@@ -17,6 +17,8 @@
 .App-Body {
     display: flex;
     flex-direction: column;
+    margin: 0 auto;
+    max-width: 1280px;
 }
 
 #root {
@@ -25,6 +27,7 @@
     font-family: Roboto, Helvetica, Arial, sans-serif;
     box-sizing: border-box;
     line-height: 1.15;
+    letter-spacing: .02em;
 }
 
 h1 {

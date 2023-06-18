@@ -10,11 +10,11 @@ export default function Search() {
     return (
         <div className="App">
             <Nav />
-            <Trailers />
-            <header className="App-header">
-                <h1>Trending in</h1>
-            </header>
             <div className='App-Body'>
+                <Trailers />
+                <header className="App-header">
+                    <h1>Trending in</h1>
+                </header>
                 {genreList.map(genreItem => (
                     <Genres key={genreItem} genre={genreItem} />
                 ))}
