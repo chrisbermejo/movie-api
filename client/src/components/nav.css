@@ -159,7 +159,7 @@ nav {
     background-color: rgba(255, 255, 255, 0.075);
 }
 
-@media screen and (max-width: 1280px) {
+@media screen and (max-width: 1279px) {
     .search-bar-container {
         max-width: 448px;
     }
