@@ -14,9 +14,12 @@ nav {
     display: flex;
     align-items: center;
     margin: 0 auto;
-    max-width: 1256px;
+    max-width: 1280px;
     padding: 0px 0.75rem;
     height: 100%;
+    box-sizing: border-box;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .logo-img {
@@ -162,7 +165,7 @@ nav {
     }
 
     .nav-container {
-        width: 1000px;
+        width: 1024px;
     }
 }
 
