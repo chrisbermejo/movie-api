@@ -26,6 +26,8 @@
     box-sizing: border-box;
     line-height: 1.15;
     letter-spacing: .02em;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 h1 {
