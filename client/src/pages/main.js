@@ -5,19 +5,21 @@ import Trailers from '../components/trailers';
 import '../App.css';
 
 export default function Search() {
-    const genreList = ['Action', 'Adventure', 'Animation', 'Comedy', 'Crime', 'Thriller', 'Horror'];
-
+    // const genreList = ['Action', 'Adventure', 'Animation', 'Comedy', 'Crime', 'Thriller', 'Horror'];
+    const genreList = ['Action', 'Adventure'];
     return (
         <div className="App">
             <Nav />
             <div className='App-Body'>
                 <Trailers />
-                <header className="App-header">
-                    <h1>Trending in</h1>
-                </header>
-                {genreList.map(genreItem => (
-                    <Genres key={genreItem} genre={genreItem} />
-                ))}
+                <div className='App-container' >
+                    <header className="App-header">
+                        <h2 className='App-header-text'>What to watch</h2>
+                    </header>
+                    {genreList.map(genreItem => (
+                        <Genres key={genreItem} genre={genreItem} />
+                    ))}
+                </div>
             </div>
         </div>
     );

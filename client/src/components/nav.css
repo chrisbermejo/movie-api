@@ -48,7 +48,7 @@ nav {
 }
 
 .menu-button-container {
-    gap: 2px;
+    gap: 4px;
 }
 
 .lang-container {
@@ -81,8 +81,9 @@ nav {
     min-height: 2rem;
     background-color: white;
     font-size: 0.875rem;
-    width: 720px;
+    max-width: 720px;
     margin: 0 .5rem;
+    width: 100%;
 }
 
 .search-bar {
@@ -123,7 +124,7 @@ nav {
 }
 
 .search-bar-container .search-bar-button {
-    width: 56px;
+    /* width: 56px; */
     justify-content: flex-end;
     padding: 0;
     padding-right: 4px;
