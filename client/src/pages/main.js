@@ -5,8 +5,8 @@ import Trailers from '../components/trailers';
 import '../App.css';
 
 export default function Search() {
-    // const genreList = ['Action', 'Adventure', 'Animation', 'Comedy', 'Crime', 'Thriller', 'Horror'];
-    const genreList = ['Action', 'Adventure'];
+    const genreList = ['Action', 'Adventure', 'Animation', 'Comedy', 'Crime', 'Thriller', 'Horror'];
+    
     return (
         <div className="App">
             <Nav />
