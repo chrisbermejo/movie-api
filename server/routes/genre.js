@@ -13,7 +13,7 @@ router.get('/:genre', (req, res) => {
             // Load the HTML content of the web page into Cheerio
             const $ = cheerio.load(response.data);
 
-            const jsonContentss = [];
+            const jsonContentss = []
             let counter = 0;
             $('.lister-item.mode-advanced ').each((index, element) => {
 
@@ -23,7 +23,11 @@ router.get('/:genre', (req, res) => {
 
                 const imdbText = $(element).children('.lister-item-content').children('.lister-item-header').children('a');
                 const title = imdbText.text();
-                const link = 'https://www.imdb.com' + imdbText.attr('href');
+
+                const temp_link = imdbText.attr('href');
+                const link = 'https://www.imdb.com/' + temp_link.split('?')[0] + 'reference';
+                console.log(link);
+
 
                 const old_imageUrl = $(element).children('div.lister-item-image.float-left').children('a').children('img').attr('loadlate');
                 const new_imageUrl = old_imageUrl.split("_V1")[0] + "._V1_QL125_UX240_.jpg";
@@ -39,7 +43,6 @@ router.get('/:genre', (req, res) => {
                 jsonContentss.push(jsonItem);
                 counter++;
             });
-
             res.send(jsonContentss);
         })
         .catch(error => {
