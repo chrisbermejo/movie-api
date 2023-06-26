@@ -135,6 +135,10 @@ nav {
     background-color: white;
 }
 
+.search-bar-button-svg {
+    fill: #00000085;
+}
+
 .nav-container-items {
     min-height: 2rem;
     display: flex;

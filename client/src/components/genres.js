@@ -12,18 +12,18 @@ export default function Genres(props) {
 
     const container = document.querySelector(`div[data-set=${props.genre}]`);
 
-    console.log(window.innerWidth-15)
+    console.log(window.innerWidth - 15)
 
     let clickAmount = 0;
 
-    function next(){
-        container.scrollLeft += 1258;
+    function next() {
+        container.scrollLeft += 1259;
     }
 
-    function prev(){
-        container.scrollLeft -= 1258;
+    function prev() {
+        container.scrollLeft -= 1259;
     }
-        
+
 
     useEffect(() => {
         getGenres().then(setmovieData);

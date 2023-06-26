@@ -7,13 +7,13 @@
     scroll-behavior: smooth;
 }
 
-.genre-wrapper::-webkit-scrollbar{
+.genre-wrapper::-webkit-scrollbar {
     display: none;
 }
 
 .genre-a-image {
-    width: 178px;
-    height: 264px;
+    width: 185px;
+    height: 274px;
     text-align: center;
 }
 
@@ -66,27 +66,27 @@ h2 {
     padding: 0 1.5rem;
 }
 
-.genre-poster-card{
+.genre-poster-card {
     background-color: #1a1a1a;
     max-width: 100%;
 }
 
-.genre-poster-card-info{
+.genre-poster-card-info {
     display: flex;
     padding: 0 10px;
     flex-direction: column;
 }
 
-.genre-poster-card-info-rating{
+.genre-poster-card-info-rating {
     display: flex;
     align-items: center;
 }
 
-.genre-poster-card-info-rating-star-container{
+.genre-poster-card-info-rating-star-container {
     color: rgb(255, 255, 255, .7);
 }
 
-.genre-poster-card-info-rating-star-svg{
+.genre-poster-card-info-rating-star-svg {
     margin-right: 0.15em;
     fill: var(--main-imdb-yellow-color);
     height: 0.8em;
@@ -94,10 +94,10 @@ h2 {
     margin-right: 0.15em;
 }
 
-.genre-poster-card-info-rate-button{
+.genre-poster-card-info-rate-button {
     padding: 0 0.75rem;
     background: transparent;
-    color:blue;
+    color: blue;
     border: none;
     min-width: 3rem;
     min-height: 2.25rem;
@@ -105,22 +105,21 @@ h2 {
     position: relative;
 }
 
-.genre-poster-card-info-rate-button-svg-container{
+.genre-poster-card-info-rate-button-svg-container {
     color: #5799ef;
     margin-right: 0;
 }
 
-.genre-poster-card-info-rate-button-svg{
+.genre-poster-card-info-rate-button-svg {
     fill: #5799ef;
     height: 0.8em;
     width: 1.5em;
     margin-right: 0.15em;
 }
 
-.genre-poster-card-info-title{
+.genre-poster-card-info-title {
     height: 2.5rem;
     width: 100%;
 }
 
-.genre-poster-card-info-title-span{
-}
+.genre-poster-card-info-title-span {}
