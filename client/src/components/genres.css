@@ -13,8 +13,9 @@
 }
 
 .genre-a-image {
-    width: 185px;
-    height: 274px;
+    /* width: 185px;
+    height: 274px; */
+    width: 100%;
     text-align: center;
 }
 
