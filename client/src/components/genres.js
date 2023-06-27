@@ -44,7 +44,7 @@ export default function Genres(props) {
                         <div key={movie.key} className='genre-poster-card'>
                             <div className='genre-poster-card-image'>
                                 <a href={movie.link}>
-                                    <img className='genre-a-image' src={movie.image} alt={movie.title} />
+                                    <img className='genre-a-image' src={movie.image} alt={movie.title} sizes="50vw, (min-width: 480px) 34vw, (min-width: 600px) 26vw, (min-width: 1024px) 16vw, (min-width: 1280px) 16vw" />
                                 </a>
                             </div>
                             <div className='genre-poster-card-info'>

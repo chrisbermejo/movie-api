@@ -1,6 +1,7 @@
 .genre-wrapper {
     display: grid;
     grid-gap: 1.55rem;
+    grid-auto-columns: calc(8.3333333333% - ((11 / 12) * 1.5rem) - 0rem);
     grid-auto-flow: column;
     overflow-x: auto;
     overflow-y: hidden;
@@ -69,6 +70,8 @@ h2 {
 .genre-poster-card {
     background-color: #1a1a1a;
     max-width: 100%;
+    width: 100%;
+    grid-column: span 2;
 }
 
 .genre-poster-card-info {
