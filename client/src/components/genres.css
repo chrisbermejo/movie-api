@@ -1,3 +1,7 @@
+.genre-wrapper-container {
+    position: relative;
+}
+
 .genre-wrapper {
     display: grid;
     grid-gap: 1.55rem;
@@ -73,12 +77,14 @@ h2 {
     max-width: 100%;
     width: 100%;
     grid-column: span 2;
+    border-radius: 4px;
 }
 
 .genre-poster-card-info {
     display: flex;
     padding: 0 10px;
     flex-direction: column;
+    margin-top: 8px;
 }
 
 .genre-poster-card-info-rating {
@@ -124,6 +130,76 @@ h2 {
 .genre-poster-card-info-title {
     height: 2.5rem;
     width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.25rem;
 }
 
 .genre-poster-card-info-title-span {}
+
+.genre-poster-card-info-actions-watchlist {
+    min-height: 2.25rem;
+    padding: 0 1rem;
+    width: 100%;
+    color: rgb(87, 153, 239);
+    background: hsla(0, 0%, 100%, .08);
+    outline: 0;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.genre-poster-card-info-actions {
+    padding-top: .75rem;
+}
+
+.genre-poster-card-info-actions-trailer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: .5rem 0;
+}
+
+.genre-poster-card-info-actions-trailer-a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2.25rem;
+}
+
+.genre-poster-card-info-actions-trailer-svg,
+.genre-poster-card-info-actions-watchlist-svg {
+    margin-right: .25rem;
+}
+
+.genre-poster-card-info-actions-trailer-span,
+.genre-poster-card-info-actions-watchlist-span {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.genre-poster-card-info-actions-watchlist-svg {
+    fill: rgb(87, 153, 239);
+}
+
+#prev-button,
+#next-button {
+    border-radius: 4px;
+    background: hsla(0, 0%, 7%, .45);
+    border: 1px solid hsla(0, 0%, 100%, .7);
+    padding: 1.25rem .75rem;
+    z-index: 5;
+    position: absolute;
+    bottom: 50%;
+}
+
+#prev-button {
+    left: 0;
+}
+
+#next-button {
+    right: 0;
+}
