@@ -3,28 +3,37 @@ const cheerio = require('cheerio');
 const axios = require('axios');
 const router = express.Router();
 
-router.get('/users', (req, res) => {
+router.get('/search/:title', (req, res) => {
     const url = 'https://www.imdb.com/search/title/?title=';
-    const input = 'Star Wars Clone Wars'
+    const input = req.params.title
     const output = url + input.split(' ').join('+')
 
     axios.get(output)
         .then(response => {
-            // Load the HTML content of the web page into Cheerio
             const $ = cheerio.load(response.data);
 
             const jsonContentss = [];
             let counter = 0;
 
-            $('.lister-item-header a').each((index, element) => {
+            $('.lister-item-content').each((index, element) => {
                 if (counter >= 10) {
                     return false;
                 }
-                const title = $(element).text();
-                const link = 'https://www.imdb.com/' + $(element).attr('href');
+
+                const title = $(element).children('.lister-item-header').children('a').text();
+                
+                const year = $(element).children('.lister-item-header').children('.lister-item-year').text();
+                
+                const actors = $(element).children('.ratings-bar').next().next().text();
+                const starSection = actors.substring(actors.indexOf("Stars:") + 6);
+                const starNames = starSection.split(",").map(star => star.trim());
+
+                const link = 'https://www.imdb.com/' + $(element).children('.lister-item-header').children('a').attr('href');
                 const jsonItem = {
                     key: counter,
                     title: title,
+                    year: year.slice(1,5),
+                    starNames: starNames.slice(0,2),
                     link: link
                 };
                 jsonContentss.push(jsonItem);

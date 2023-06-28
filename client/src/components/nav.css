@@ -95,12 +95,17 @@ nav {
 }
 
 
-.search-bar-container div {
+.search-bar, .search-bar-input-container, .search-bar-button  {
     padding: 0px 0.3125rem;
     display: flex;
     min-height: 2rem;
     align-items: center;
     color: black;
+}
+
+.search-bar-focused{
+    box-shadow: inset 0 0 0 2px var(--ipt-accent1-color,rgb(245,197,24));
+    border-radius: 0.25rem;
 }
 
 .search-bar-container .search-bar-category {
@@ -113,11 +118,11 @@ nav {
     border-right: 1px solid rgba(0, 0, 0, 0.3);
 }
 
-.search-bar-input {
+.search-bar-input-container {
     flex-grow: 2;
 }
 
-.search-bar-input input {
+.search-bar-input{
     border: 0;
     outline: 0;
     width: 100%;
@@ -159,9 +164,31 @@ nav {
 .menu-button-container:hover,
 .watchlist-container:hover,
 .sign-in-container:hover,
-.imdbpro-container:hover {
+.imdbpro-container:hover, 
+.lang-container:hover {
     border-radius: 5px;
     background-color: rgba(255, 255, 255, 0.075);
+}
+
+.search-bar-container:focus{
+    outline-offset: 1px;
+    outline: solid yellow;
+}
+
+.search-bar-input-suggestions{
+    border-radius: .25rem;
+    top: calc(100% + 0.25rem);
+    background: rgb(31,31,31);
+    width: 100%;
+    left: 0px;
+    right: 0px;
+    position: absolute;
+    color: white;
+    z-index: 15;
+}
+
+.search-bar{
+    position: relative;
 }
 
 @media screen and (max-width: 1279px) {
@@ -234,7 +261,7 @@ nav {
     }
 
     .search-bar-container .search-bar-category,
-    .search-bar-container .search-bar-input {
+    .search-bar-container .search-bar-input-container {
         display: none;
     }
 

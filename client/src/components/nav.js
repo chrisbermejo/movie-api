@@ -1,6 +1,5 @@
 import './nav.css';
 import React from 'react';
-import imdbLogo from "../images/imdb-logo.svg";
 
 export default function getNav() {
     return (
@@ -18,8 +17,11 @@ export default function getNav() {
                 <div className='search-bar-container'>
                     <div className='search-bar'>
                         <div className='search-bar-category'>All</div>
-                        <div className='search-bar-input'>
-                            <input placeholder='Search IMDb'></input>
+                        <div className='search-bar-input-container'>
+                            <input className='search-bar-input' placeholder='Search IMDb'></input>
+                            <div className='search-bar-input-suggestions'>
+                                <div>HELLO 111111111</div>
+                            </div>
                         </div>
                         <div className='search-bar-button nav-container-items'>
                             <button>

@@ -79,7 +79,7 @@ export default function Genres(props) {
                                         </div>
                                     </div>
                                     <a className='genre-poster-card-image-a' href={movie.link}>
-                                        <img className='genre-a-image' src={movie.image} alt={movie.title} sizes="50vw, (min-width: 480px) 34vw, (min-width: 600px) 26vw, (min-width: 1024px) 16vw, (min-width: 1280px) 16vw" />
+                                        <img className='genre-a-image' src={movie.image} alt={movie.title} loading="lazy" sizes="50vw, (min-width: 480px) 34vw, (min-width: 600px) 26vw, (min-width: 1024px) 16vw, (min-width: 1280px) 16vw" />
                                     </a>
                                 </div>
                                 <div className='genre-poster-card-info'>
