@@ -24,8 +24,8 @@ router.get('/search/:title', (req, res) => {
                 
                 const year = $(element).children('.lister-item-header').children('.lister-item-year').text();
                 
-                const actors = $(element).children('.ratings-bar').next().next().text();
-                const starSection = actors.substring(actors.indexOf("Stars:") + 6);
+                const stars = $(element).children('.ratings-bar').next().next().text();
+                const starSection = stars.substring(stars.indexOf("Stars:") + 6);
                 const starNames = starSection.split(",").map(star => star.trim());
 
                 const link = 'https://www.imdb.com/' + $(element).children('.lister-item-header').children('a').attr('href');
