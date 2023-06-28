@@ -185,8 +185,8 @@ h2 {
     fill: rgb(87, 153, 239);
 }
 
-#prev-button,
-#next-button {
+.prev-button,
+.next-button {
     border-radius: 4px;
     background: hsla(0, 0%, 7%, .45);
     border: 1px solid hsla(0, 0%, 100%, .7);
@@ -194,12 +194,19 @@ h2 {
     z-index: 5;
     position: absolute;
     bottom: 50%;
+    transition: all .25s ease-out;
+    opacity: 0;
 }
 
-#prev-button {
+.prev-button {
     left: 0;
 }
 
-#next-button {
+.next-button {
     right: 0;
+}
+
+.genre-wrapper-container:hover .active-button-prev,
+.active-button {
+    opacity: 1;
 }

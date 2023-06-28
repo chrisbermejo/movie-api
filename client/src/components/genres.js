@@ -12,16 +12,35 @@ export default function Genres(props) {
 
     const container = document.querySelector(`div[data-set=${props.genre}]`);
 
-    console.log(window.innerWidth - 15)
-
-    let clickAmount = 0;
+    let genreButtonCounter = 0;
+    const next_button = document.querySelector(`button[data-set=${props.genre}].next-button`);
+    const prev_button = document.querySelector(`button[data-set=${props.genre}].prev-button`);
 
     function next() {
         container.scrollLeft += 1268;
+        if (genreButtonCounter < 4) {
+            genreButtonCounter++
+            console.log(genreButtonCounter);
+        }
+        if (genreButtonCounter == 4) {
+            next_button.classList.remove("active-button");
+        }
+        if (genreButtonCounter == 1) {
+            prev_button.classList.add("active-button-prev");
+        }
     }
 
     function prev() {
         container.scrollLeft -= 1268;
+        if (genreButtonCounter >= 1) {
+            next_button.classList.add("active-button");
+            genreButtonCounter--;
+            console.log(genreButtonCounter);
+        }
+        if (genreButtonCounter == 0) {
+            prev_button.classList.remove("active-button-prev");
+            next_button.classList.add("active-button");
+        }
     }
 
 
@@ -40,7 +59,7 @@ export default function Genres(props) {
                     </svg>
                 </div>
                 <div className='genre-wrapper-container'>
-                    <button onClick={() => prev()} id='prev-button'>
+                    <button onClick={() => prev()} className='prev-button' data-set={props.genre}>
                         <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" role="presentation"><path d="M18.378 23.369c.398-.402.622-.947.622-1.516 0-.568-.224-1.113-.622-1.515l-8.249-8.34 8.25-8.34a2.16 2.16 0 0 0 .548-2.07A2.132 2.132 0 0 0 17.428.073a2.104 2.104 0 0 0-2.048.555l-9.758 9.866A2.153 2.153 0 0 0 5 12.009c0 .568.224 1.114.622 1.515l9.758 9.866c.808.817 2.17.817 2.998-.021z"></path></svg>
                     </button>
                     <div className='genre-wrapper' data-set={props.genre}>
@@ -85,7 +104,7 @@ export default function Genres(props) {
                         ))
                         }
                     </div>
-                    <button onClick={() => next()} id='next-button'>
+                    <button onClick={() => next()} className='next-button active-button' data-set={props.genre}>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" role="presentation"><path d="M5.622.631A2.153 2.153 0 0 0 5 2.147c0 .568.224 1.113.622 1.515l8.249 8.34-8.25 8.34a2.16 2.16 0 0 0-.548 2.07c.196.74.768 1.317 1.499 1.515a2.104 2.104 0 0 0 2.048-.555l9.758-9.866a2.153 2.153 0 0 0 0-3.03L8.62.61C7.812-.207 6.45-.207 5.622.63z"></path></svg>
                     </button>
                 </div>
