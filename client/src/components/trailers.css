@@ -168,7 +168,8 @@ a.up-next-footer:hover {
     width: 165px;
 }
 
-.slide-img-poster-ribbon {
+.slide-img-poster-ribbon,
+.genre-poster-card-image-ribbon {
     position: absolute;
     top: 0;
     left: 0;
@@ -178,7 +179,8 @@ a.up-next-footer:hover {
     height: 3.4rem;
 }
 
-.slide-img-poster-ribbon-svg {
+.slide-img-poster-ribbon-svg,
+.genre-poster-card-image-svg {
     position: relative;
     width: 100%;
     height: auto;

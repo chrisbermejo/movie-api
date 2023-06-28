@@ -210,3 +210,22 @@ h2 {
 .active-button {
     opacity: 1;
 }
+
+.genre-poster-card-image {
+    position: relative;
+}
+
+.genre-poster-card-image-a {
+    display: block;
+    height: 100%;
+}
+
+.genre-poster-card-image-svg {
+    position: absolute;
+}
+
+.genre-poster-card-image .ribbon-m {
+    font-size: 1.5rem;
+    width: 2rem;
+    height: 2.6rem;
+}

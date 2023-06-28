@@ -60,13 +60,25 @@ export default function Genres(props) {
                 </div>
                 <div className='genre-wrapper-container'>
                     <button onClick={() => prev()} className='prev-button' data-set={props.genre}>
-                        <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" role="presentation"><path d="M18.378 23.369c.398-.402.622-.947.622-1.516 0-.568-.224-1.113-.622-1.515l-8.249-8.34 8.25-8.34a2.16 2.16 0 0 0 .548-2.07A2.132 2.132 0 0 0 17.428.073a2.104 2.104 0 0 0-2.048.555l-9.758 9.866A2.153 2.153 0 0 0 5 12.009c0 .568.224 1.114.622 1.515l9.758 9.866c.808.817 2.17.817 2.998-.021z"></path></svg>
+                        <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" role="presentation">
+                            <path d="M18.378 23.369c.398-.402.622-.947.622-1.516 0-.568-.224-1.113-.622-1.515l-8.249-8.34 8.25-8.34a2.16 2.16 0 0 0 .548-2.07A2.132 2.132 0 0 0 17.428.073a2.104 2.104 0 0 0-2.048.555l-9.758 9.866A2.153 2.153 0 0 0 5 12.009c0 .568.224 1.114.622 1.515l9.758 9.866c.808.817 2.17.817 2.998-.021z"></path>
+                        </svg>
                     </button>
                     <div className='genre-wrapper' data-set={props.genre}>
                         {movieData.map(movie => (
                             <div key={movie.key} className='genre-poster-card'>
                                 <div className='genre-poster-card-image'>
-                                    <a href={movie.link}>
+                                    <div className='genre-poster-card-image-ribbon ribbon-m'>
+                                        <svg className="genre-poster-card-image-svg" width="24px" height="34px" viewBox="0 0 24 34">
+                                            <polygon className="svg-polygon-1" fill="#000000" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343"></polygon>
+                                            <polygon className="svg-polygon-2" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343"></polygon>
+                                            <polygon className="svg-polygon-3" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049"></polygon>
+                                        </svg>
+                                        <div className='slide-img-poster-ribbon-overlay' >
+                                            <svg width="24" height="24" viewBox="0 0 24 24" ><path d="M18 13h-5v5c0 .55-.45 1-1 1s-1-.45-1-1v-5H6c-.55 0-1-.45-1-1s.45-1 1-1h5V6c0-.55.45-1 1-1s1 .45 1 1v5h5c.55 0 1 .45 1 1s-.45 1-1 1z"></path></svg>
+                                        </div>
+                                    </div>
+                                    <a className='genre-poster-card-image-a' href={movie.link}>
                                         <img className='genre-a-image' src={movie.image} alt={movie.title} sizes="50vw, (min-width: 480px) 34vw, (min-width: 600px) 26vw, (min-width: 1024px) 16vw, (min-width: 1280px) 16vw" />
                                     </a>
                                 </div>
