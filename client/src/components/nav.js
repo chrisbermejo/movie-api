@@ -1,5 +1,6 @@
 import './nav.css';
 import React from 'react';
+import SearchSuggestions from '../components/search-bar-suggestions';
 
 export default function getNav() {
     return (
@@ -17,12 +18,7 @@ export default function getNav() {
                 <div className='search-bar-container'>
                     <div className='search-bar'>
                         <div className='search-bar-category'>All</div>
-                        <div className='search-bar-input-container'>
-                            <input className='search-bar-input' placeholder='Search IMDb'></input>
-                            <div className='search-bar-input-suggestions'>
-                                <div>HELLO 111111111</div>
-                            </div>
-                        </div>
+                        <SearchSuggestions />
                         <div className='search-bar-button nav-container-items'>
                             <button>
                                 <svg className='search-bar-button-svg' width="24" height="24" viewBox="0 0 24 24">

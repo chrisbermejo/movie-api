@@ -1,8 +1,9 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const router = require('./routes/router')
+const router = require('./routes/search')
 const genreRouter = require('./routes/genre')
+const searchRouter = require('./routes/search')
 
 const app = express();
 
@@ -18,6 +19,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 app.use('/', router);
 app.use('/api/genre/', genreRouter)
+app.use('/search', searchRouter)
 
 const port = 4000;
 const server = app.listen(port, () => {
