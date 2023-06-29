@@ -30,7 +30,7 @@ router.get('/:title', (req, res) => {
 
                 const year = $(element).children('.lister-item-content').children('.lister-item-header').children('.lister-item-year').text();
 
-                const stars = $(element).children('.lister-item-content').children('.ratings-bar').next().next().text();
+                const stars = $(element).children('.lister-item-content').children('.text-muted').last().next().text();
                 const starSection = stars.substring(stars.indexOf("Stars:") + 6);
                 const starNames = starSection.split(",").map(star => star.trim());
 
