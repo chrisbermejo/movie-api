@@ -63,3 +63,7 @@
 .search-bar-input-suggestions.hide {
     opacity: 0;
 }
+
+.search-bar-input::placeholder{
+    font-weight: 545;
+}

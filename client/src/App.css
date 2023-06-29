@@ -8,6 +8,9 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     --main-imdb-yellow-color: rgb(245, 197, 24);
+    --ipt-font-root-size: 100%;
+    font-size: 100%;
+    font-size: var(--ipt-font-root-size)
 }
 
 svg {
