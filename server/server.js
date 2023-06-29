@@ -4,20 +4,6 @@ const bodyParser = require('body-parser');
 const router = require('./routes/search')
 const genreRouter = require('./routes/genre')
 const searchRouter = require('./routes/search')
-const cors = require('cors');
-
-app.use(
-    cors({
-      origin: 'http://192.168.1.38/',
-      methods: ['GET', 'POST'],
-      allowedHeaders: ['Content-Type', 'Authorization'],
-      credentials: true,
-    })
-  );
-  
-
-  app.set('trust proxy', true);
-
 
 const app = express();
 
@@ -39,4 +25,3 @@ const port = 4000;
 const server = app.listen(port, () => {
     console.log(`Server is ruinning on port ${port}`)
 })
-
