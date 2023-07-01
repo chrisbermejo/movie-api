@@ -21,7 +21,7 @@ app.use('/', router);
 app.use('/api/genre/', genreRouter)
 app.use('/search', searchRouter)
 
-// const port = 4000;
-// const server = app.listen(port, () => {
-//     console.log(`Server is ruinning on port ${port}`)
-// })
+const port = 4000;
+const server = app.listen(port, () => {
+    console.log(`Server is ruinning on port ${port}`)
+})
