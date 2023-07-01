@@ -141,12 +141,6 @@ a:any-link {
     height: 26px;
 }
 
-.slide-img-poster {
-    /* background: hsla(0, 0%, 100%, .15); */
-    /* height: 245px; */
-    /* background: red; */
-}
-
 .slide-img-poster img {
     width: 100%;
     /* bottom: 0;
@@ -276,7 +270,6 @@ a.up-next-footer:hover {
 
 .slide-img-overlay-container {
     background: linear-gradient(transparent 0%, transparent 65%, rgba(0, 0, 0, 0.7) 77%, rgb(0, 0, 0) 85%, rgb(0, 0, 0) 100%);
-    font-smooth: auto;
     box-sizing: border-box;
     height: 100%;
     position: absolute;
@@ -326,10 +319,6 @@ a.up-next-footer:hover {
 
     .play-icon-header {
         font-size: 16px;
-    }
-
-    .play-icon-subheader {
-        /* font-size: 10px; */
     }
 
     .slide-img-MAIN {

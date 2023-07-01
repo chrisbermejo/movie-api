@@ -4,13 +4,68 @@ const axios = require('axios');
 const router = express.Router();
 
 const instance = axios.create({
-    headers: { 'Accept-Language': 'en-US,en;q=0.9' },
+    headers: {
+        'Accept-Language': 'en-US,en;q=0.9',
+        'Accept': 'application/json, text/plain, */*',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36',
+    },
+
 });
 
+// router.get('/:title', (req, res) => {
+//     const url = 'https://www.imdb.com/search/title/?title=';
+//     const input = req.params.title.split(' ').join('+');
+//     const output = url + input;
+
+//     instance.get(output)
+//         .then(response => {
+//             console.log(response.data)
+//             const $ = cheerio.load(response.data);
+
+//             const jsonContentss = [];
+//             let counter = 0;
+
+//             $('.lister-item.mode-advanced').each((index, element) => {
+//                 if (counter >= 8) {
+//                     return false;
+//                 }
+
+//                 const imageURL = $(element).children('.lister-item-image').children('a').children('img').attr('loadlate');
+
+//                 const title = $(element).children('.lister-item-content').children('.lister-item-header').children('a').text();
+
+//                 const year = $(element).children('.lister-item-content').children('.lister-item-header').children('.lister-item-year').text();
+
+//                 const stars = $(element).children('.lister-item-content').children('.text-muted').last().next().text();
+//                 const starSection = stars.substring(stars.indexOf("Stars:") + 6);
+//                 const starNames = starSection.split(",").map(star => star.trim());
+
+//                 const link = 'https://www.imdb.com/' + $(element).children('.lister-item-content').children('.lister-item-header').children('a').attr('href');
+//                 const jsonItem = {
+//                     input: input,
+//                     key: counter,
+//                     image: imageURL,
+//                     title: title,
+//                     year: year.slice(1, 5),
+//                     starNames: starNames.slice(0, 2),
+//                     link: link
+//                 };
+//                 jsonContentss.push(jsonItem);
+//                 counter++;
+//             });
+
+//             res.send(jsonContentss);
+//         })
+//         .catch(error => {
+//             console.error('Error retrieving the web page:', error);
+//         });
+
+// });
+
 router.get('/:title', (req, res) => {
-    const url = 'https://www.imdb.com/search/title/?title=';
-    const input = req.params.title.split(' ').join('+');
-    const output = url + input;
+    const url = 'https://www.imdb.com/find/?q=';
+    const input = req.params.title.split(' ').join('%20');
+    const output = url + input + '&s=tt&ref_=fn_tt_pop';
 
     instance.get(output)
         .then(response => {
@@ -19,28 +74,27 @@ router.get('/:title', (req, res) => {
             const jsonContentss = [];
             let counter = 0;
 
-            $('.lister-item.mode-advanced').each((index, element) => {
+            $('.ipc-metadata-list-summary-item').each((index, element) => {
                 if (counter >= 8) {
                     return false;
                 }
 
-                const imageURL = $(element).children('.lister-item-image').children('a').children('img').attr('loadlate');
+                const imageURL = $(element).children('.eBTIIV').children('.ipc-media__img').children('img').attr('src');
 
-                const title = $(element).children('.lister-item-content').children('.lister-item-header').children('a').text();
+                const title = $(element).children('.ipc-metadata-list-summary-item__c').children('.ipc-metadata-list-summary-item__tc').children('a').text();
 
-                const year = $(element).children('.lister-item-content').children('.lister-item-header').children('.lister-item-year').text();
+                const year = $(element).children('.ipc-metadata-list-summary-item__c').children('.ipc-metadata-list-summary-item__tc').children('ul').children('li:first-child').children('span').text();
 
-                const stars = $(element).children('.lister-item-content').children('.text-muted').last().next().text();
-                const starSection = stars.substring(stars.indexOf("Stars:") + 6);
-                const starNames = starSection.split(",").map(star => star.trim());
+                const stars = $(element).children('.ipc-metadata-list-summary-item__c').children('.ipc-metadata-list-summary-item__tc').children('ul:last-child').children('li:last-child').children('span').text();
+                let starNames = stars.split(", ").map(star => star);
 
-                const link = 'https://www.imdb.com/' + $(element).children('.lister-item-content').children('.lister-item-header').children('a').attr('href');
+                const link = 'https://www.imdb.com/' + $(element).children('.ipc-metadata-list-summary-item__c').children('.ipc-metadata-list-summary-item__tc').children('a').attr('href');
+
                 const jsonItem = {
-                    input: input,
                     key: counter,
                     image: imageURL,
                     title: title,
-                    year: year.slice(1, 5),
+                    year: year.slice(0, 4),
                     starNames: starNames.slice(0, 2),
                     link: link
                 };

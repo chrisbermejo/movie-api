@@ -16,10 +16,9 @@ export default function Search() {
                     <header className="App-header">
                         <h2 className='App-header-text'>What to watch</h2>
                     </header>
-                    {/* {genreList.map(genreItem => (
+                    {genreList.map(genreItem => (
                         <Genres key={genreItem} genre={genreItem} />
-                    ))} */}
-                    <Genres key="1" genre={genreList[1]} />
+                    ))}
                 </div>
             </div>
         </div>
