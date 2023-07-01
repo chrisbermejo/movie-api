@@ -38,10 +38,12 @@
     color: rgba(255, 255, 255, 0.7);
 }
 
-.search-bar--focused {
-    outline: none;
-    box-shadow: inset 0 0 0 2px rgb(245, 197, 24);
-    border-radius: .25rem;
+@media screen and (min-width: 601px) {
+    .search-bar--focused {
+        outline: none;
+        box-shadow: inset 0 0 0 2px rgb(245, 197, 24);
+        border-radius: .25rem;
+    }
 }
 
 .search-bar-input-suggestions-all {
@@ -64,6 +66,6 @@
     opacity: 0;
 }
 
-.search-bar-input::placeholder{
+.search-bar-input::placeholder {
     font-weight: 545;
 }

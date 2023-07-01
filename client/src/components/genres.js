@@ -1,5 +1,5 @@
 import './genres.css'
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 export default function Genres(props) {
 
     async function getGenres() {
@@ -10,43 +10,93 @@ export default function Genres(props) {
 
     const [movieData, setmovieData] = useState([]);
 
-    const container = document.querySelector(`div[data-set=${props.genre}]`);
+    // const container = document.querySelector(`div[data-set=${props.genre}]`);
 
     let genreButtonCounter = 0;
+
     const next_button = document.querySelector(`button[data-set=${props.genre}].next-button`);
     const prev_button = document.querySelector(`button[data-set=${props.genre}].prev-button`);
 
-    function next() {
-        container.scrollLeft += 1268;
-        if (genreButtonCounter < 4) {
-            genreButtonCounter++
-            console.log(genreButtonCounter);
-        }
-        if (genreButtonCounter == 4) {
-            next_button.classList.remove("active-button");
-        }
-        if (genreButtonCounter == 1) {
-            prev_button.classList.add("active-button-prev");
-        }
-    }
+    const containerRef = useRef(null);
 
-    function prev() {
-        container.scrollLeft -= 1268;
-        if (genreButtonCounter >= 1) {
-            next_button.classList.add("active-button");
-            genreButtonCounter--;
-            console.log(genreButtonCounter);
+
+    const scrollToChild = (index) => {
+        if (containerRef.current) {
+            const childElements = containerRef.current.getElementsByClassName('genre-poster-card');
+            if (childElements.length > index) {
+                const childElement = childElements[index];
+                const containerRect = containerRef.current.getBoundingClientRect();
+                const childRect = childElement.getBoundingClientRect();
+
+                childElement.scrollIntoView({
+                    behavior: 'smooth', // Scroll with smooth animation
+                    block: 'nearest', // Scroll to the nearest edge of the container
+                    inline: 'start' // Center the element horizontally within the container
+                });
+
+                const containerScrollLeft = containerRef.current.scrollLeft;
+                const childOffset = childRect.left - containerRect.left;
+                const extraOffset = 620; // Adjust this value to control the additional offset
+
+                containerRef.current.scrollLeft = containerScrollLeft + childOffset - containerRect.width / 2 + extraOffset;
+            }
         }
-        if (genreButtonCounter == 0) {
+    };
+
+
+
+    const handlePrevButtonClick = () => {
+        if (genreButtonCounter == 1) {
+            scrollToChild(0);
             prev_button.classList.remove("active-button-prev");
             next_button.classList.add("active-button");
+            genreButtonCounter--;
         }
-    }
+        else if (genreButtonCounter == 2) {
+            scrollToChild(6);
+            genreButtonCounter--;
+        }
+        // if (genreButtonCounter >= 1) {
+        //     next_button.classList.add("active-button");
+        //     genreButtonCounter--;
+        //     console.log(genreButtonCounter);
+        // }
+    };
 
+    const handleNextButtonClick = () => {
+
+        if (genreButtonCounter == 0) {
+            scrollToChild(6);
+            prev_button.classList.add("active-button-prev");
+            genreButtonCounter++;
+        }
+        else if (genreButtonCounter == 1) {
+            scrollToChild(12);
+            genreButtonCounter++;
+        }
+        else if (genreButtonCounter == 4) {
+            next_button.classList.remove("active-button");
+        }
+    };
 
     useEffect(() => {
         getGenres().then(setmovieData);
+        if (containerRef.current) {
+            containerRef.current.scrollTop = 0;
+        }
     }, []);
+
+    // document.addEventListener("DOMContentLoaded", () => {
+    //     const container = document.querySelector(`div[data-set=${props.genre}]`);
+
+    //     if (!container) {
+    //         console.error("Container element not found");
+    //         return;
+    //     }
+
+    //     container.scrollLeft = 0;
+    // });
+
 
     return (
         <>
@@ -59,12 +109,12 @@ export default function Genres(props) {
                     </svg>
                 </div>
                 <div className='genre-wrapper-container'>
-                    <button onClick={() => prev()} className='prev-button' data-set={props.genre}>
+                    <button onClick={handlePrevButtonClick} className='prev-button' data-set={props.genre}>
                         <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" role="presentation">
                             <path d="M18.378 23.369c.398-.402.622-.947.622-1.516 0-.568-.224-1.113-.622-1.515l-8.249-8.34 8.25-8.34a2.16 2.16 0 0 0 .548-2.07A2.132 2.132 0 0 0 17.428.073a2.104 2.104 0 0 0-2.048.555l-9.758 9.866A2.153 2.153 0 0 0 5 12.009c0 .568.224 1.114.622 1.515l9.758 9.866c.808.817 2.17.817 2.998-.021z"></path>
                         </svg>
                     </button>
-                    <div className='genre-wrapper' data-set={props.genre}>
+                    <div className='genre-wrapper' data-set={props.genre} ref={containerRef}>
                         {movieData.map(movie => (
                             <div key={movie.key} className='genre-poster-card'>
                                 <div className='genre-poster-card-image'>
@@ -116,7 +166,7 @@ export default function Genres(props) {
                         ))
                         }
                     </div>
-                    <button onClick={() => next()} className='next-button active-button' data-set={props.genre}>
+                    <button onClick={handleNextButtonClick} className='next-button active-button' data-set={props.genre}>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" role="presentation"><path d="M5.622.631A2.153 2.153 0 0 0 5 2.147c0 .568.224 1.113.622 1.515l8.249 8.34-8.25 8.34a2.16 2.16 0 0 0-.548 2.07c.196.74.768 1.317 1.499 1.515a2.104 2.104 0 0 0 2.048-.555l9.758-9.866a2.153 2.153 0 0 0 0-3.03L8.62.61C7.812-.207 6.45-.207 5.622.63z"></path></svg>
                     </button>
                 </div>

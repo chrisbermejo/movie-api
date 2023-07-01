@@ -271,6 +271,10 @@ nav {
 
 @media screen and (max-width: 600px) {
 
+    .nav-container {
+        padding: 0;
+    }
+
     .whitebar {
         display: none;
     }
@@ -280,16 +284,32 @@ nav {
         display: none;
     }
 
-    .search-bar-container {
-        justify-content: flex-end;
-        background-color: #0d0d0d;
-    }
-
     .search-bar {
         justify-content: flex-end;
     }
 
+    .search-bar-container {
+        justify-content: flex-end;
+        background-color: #0d0d0d00;
+        margin-right: 0;
+    }
+
     .search-bar-button {
-        display: none;
+        justify-content: flex-end;
+        background-color: #0d0d0d00;
+        opacity: 1;
+    }
+
+    .search-bar-button {
+        padding-right: 0;
+    }
+
+    .search-bar-button-svg {
+        fill: white
+    }
+
+    .lang-container {
+        padding-left: 4px;
+        padding-right: 8px;
     }
 }

@@ -10,10 +10,12 @@
     overflow-x: auto;
     overflow-y: hidden;
     scroll-behavior: smooth;
+    scrollbar-width: none;
 }
 
 .genre-wrapper::-webkit-scrollbar {
     display: none;
+    width: 0;
 }
 
 .genre-a-image {
@@ -37,7 +39,6 @@ h2 {
 }
 
 .genre-header-text {
-    background-color: black;
     padding-left: .75rem;
     position: relative;
 }
@@ -228,4 +229,32 @@ h2 {
     font-size: 1.5rem;
     width: 2rem;
     height: 2.6rem;
+}
+
+@media screen and (max-width: 1023px) {
+    .genre-wrapper {
+        grid-auto-columns: calc(12.5% - ((7 / 8) * .75rem) - .375rem);
+        grid-gap: .75rem;
+    }
+}
+
+@media screen and (max-width: 599px) {
+    .genre-wrapper {
+        grid-auto-columns: calc(25% - ((3 / 4) * .75rem) - .75rem);
+        padding: 0 1rem;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .genre-container {
+        padding: 0;
+        padding-bottom: 1rem;
+        margin: .5rem;
+        background: #121212;
+        margin-left: 0px;
+    }
+
+    .genre-header {
+        padding-top: 1rem;
+    }
 }

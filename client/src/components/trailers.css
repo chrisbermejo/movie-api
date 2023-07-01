@@ -31,6 +31,10 @@
     width: 100%;
 }
 
+.slide-img-overlay-text-play-time {
+    display: none;
+}
+
 .trailer-aside {
     width: 100%;
     height: 100%;
@@ -303,6 +307,10 @@ a.up-next-footer:hover {
         letter-spacing: normal;
         line-height: 1.5rem;
         margin-top: 4px;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
     }
 
     .slide-img-ovelay-text-play-subheader {
@@ -410,4 +418,69 @@ a.up-next-footer:hover {
         margin: 0 8px;
     }
 
+}
+
+@media screen and (max-width: 599px) {
+    .slide-img-overlay {
+        width: 90px;
+    }
+
+    .slide-img-overlay-text {
+        flex-direction: column;
+        left: 90px;
+    }
+
+    .slide-img-overlay {
+        width: 90px;
+        left: 0px;
+    }
+
+    .slide-img-ovelay-text-play-header span:last-child {
+        display: none;
+    }
+
+    .slide-img-ovelay-text-play-header {
+        font-size: 1.25rem;
+    }
+
+    .slide-img-overlay-text-play svg {
+        height: 50px;
+        width: 50px;
+    }
+
+    .slide-img-ovelay-text-play-subheader {
+        font-size: .875rem;
+    }
+
+    .slide-img-overlay-text-play-time {
+        display: flex;
+        font-size: .875rem;
+    }
+
+    .slide-img-overlay-text-play {
+        display: flex;
+        align-items: center;
+    }
+}
+
+@media screen and (min-width: 480px) {
+    .slide-img-ovelay-text-play-header span:first-child {
+        font-family: var(--ipt-font-family);
+        font-size: var(--ipt-type-headline6-size, 1.25rem);
+        letter-spacing: var(--ipt-type-headline6-letterSpacing, .0125em);
+        line-height: var(--ipt-type-headline6-lineHeight, 1.5rem);
+        text-transform: var(--ipt-type-headline6-textTransform, none);
+        font-weight: 400;
+    }
+}
+
+@media screen and (max-width: 479px) {
+    .slide-img-ovelay-text-play-header span:first-child {
+        font-family: var(--ipt-font-family);
+        font-size: var(--ipt-type-subtitle-size, 1rem);
+        font-weight: var(--ipt-type-subtitle-weight, 600);
+        letter-spacing: var(--ipt-type-subtitle-letterSpacing, .00937em);
+        line-height: var(--ipt-type-subtitle-lineHeight, 1.25rem);
+        text-transform: var(--ipt-type-subtitle-textTransform, none);
+    }
 }
