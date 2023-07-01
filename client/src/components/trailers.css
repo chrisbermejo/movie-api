@@ -465,22 +465,19 @@ a.up-next-footer:hover {
 
 @media screen and (min-width: 480px) {
     .slide-img-ovelay-text-play-header span:first-child {
-        font-family: var(--ipt-font-family);
-        font-size: var(--ipt-type-headline6-size, 1.25rem);
-        letter-spacing: var(--ipt-type-headline6-letterSpacing, .0125em);
-        line-height: var(--ipt-type-headline6-lineHeight, 1.5rem);
-        text-transform: var(--ipt-type-headline6-textTransform, none);
+        font-size: 1.25rem;
+        letter-spacing: .0125em;
+        line-height: 1.5rem;
         font-weight: 400;
     }
 }
 
 @media screen and (max-width: 479px) {
     .slide-img-ovelay-text-play-header span:first-child {
-        font-family: var(--ipt-font-family);
-        font-size: var(--ipt-type-subtitle-size, 1rem);
-        font-weight: var(--ipt-type-subtitle-weight, 600);
-        letter-spacing: var(--ipt-type-subtitle-letterSpacing, .00937em);
-        line-height: var(--ipt-type-subtitle-lineHeight, 1.25rem);
-        text-transform: var(--ipt-type-subtitle-textTransform, none);
+        font-size: 1rem;
+        font-weight: 600;
+        letter-spacing: .00937em;
+        line-height: 1.25rem;
+        text-transform: none;
     }
 }
