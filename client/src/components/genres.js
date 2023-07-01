@@ -22,26 +22,19 @@ export default function Genres(props) {
 
     const scrollToChild = (index) => {
         if (containerRef.current) {
-            const childElements = containerRef.current.getElementsByClassName('genre-poster-card');
-            if (childElements.length > index) {
-                const childElement = childElements[index];
-                const containerRect = containerRef.current.getBoundingClientRect();
-                const childRect = childElement.getBoundingClientRect();
-
-                childElement.scrollIntoView({
-                    behavior: 'smooth', // Scroll with smooth animation
-                    block: 'nearest', // Scroll to the nearest edge of the container
-                    inline: 'start' // Center the element horizontally within the container
-                });
-
-                const containerScrollLeft = containerRef.current.scrollLeft;
-                const childOffset = childRect.left - containerRect.left;
-                const extraOffset = 620; // Adjust this value to control the additional offset
-
-                containerRef.current.scrollLeft = containerScrollLeft + childOffset - containerRect.width / 2 + extraOffset;
-            }
+          const childElements = containerRef.current.getElementsByClassName('genre-poster-card');
+          if (childElements.length > index) {
+            const childElement = childElements[index];
+            childElement.scrollIntoView({
+              behavior: 'smooth',
+              block: 'nearest',
+              inline: 'start'
+            });
+    
+          }
         }
-    };
+      };
+      
 
 
 
@@ -56,11 +49,15 @@ export default function Genres(props) {
             scrollToChild(6);
             genreButtonCounter--;
         }
-        // if (genreButtonCounter >= 1) {
-        //     next_button.classList.add("active-button");
-        //     genreButtonCounter--;
-        //     console.log(genreButtonCounter);
-        // }
+        else if (genreButtonCounter == 3) {
+            scrollToChild(12);
+            genreButtonCounter--;
+        }
+        else if(genreButtonCounter == 4){
+            scrollToChild(18);
+            genreButtonCounter--;
+        }
+        
     };
 
     const handleNextButtonClick = () => {
@@ -74,7 +71,13 @@ export default function Genres(props) {
             scrollToChild(12);
             genreButtonCounter++;
         }
-        else if (genreButtonCounter == 4) {
+        else if (genreButtonCounter == 2) {
+            scrollToChild(18);
+            genreButtonCounter++;
+        }
+        else if (genreButtonCounter == 3) {
+            scrollToChild(24);
+            genreButtonCounter++;
             next_button.classList.remove("active-button");
         }
     };

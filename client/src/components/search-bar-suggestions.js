@@ -97,7 +97,7 @@ export default function SearchBarSuggestions() {
             {loading && <div>Loading...</div>}
             <div className='search-bar-input-suggestions' ref={suggestionsContainerRef}>
                 {results.map((result) => (
-                    <div className='search-bar-input-suggestion-results' key={result.key}>
+                    <a className='search-bar-input-suggestion-results' key={result.key} href={result.link}>
                         <div className='search-bar-input-suggestion-results-image-container'>
                             {result.image == undefined ?
                                 <div className='suggestion-results-undefined-image'>
@@ -117,7 +117,7 @@ export default function SearchBarSuggestions() {
                             <span>{result.year}</span>
                             <span>{result.starNames[0]}{result.starNames[1] == null ? " " : ', ' + result.starNames[1]}</span>
                         </div>
-                    </div>
+                    </a>
                 ))}
                 {results.length > 0 ? <div className='search-bar-input-suggestions-all'>See all results for "{query}"</div> : null}
             </div>

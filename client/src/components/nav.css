@@ -154,6 +154,7 @@ nav {
     min-height: 2rem;
     display: flex;
     align-items: center;
+    cursor: pointer;
 }
 
 .whitebar {
