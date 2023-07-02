@@ -43,7 +43,7 @@ export default function Genres(props) {
 
     const handleNextButtonClick = () => {
         const breakpoints = window.innerWidth >= 1025 ? scrollPositions.MIN_WIDTH_1025 : window.innerWidth >= 600 ? scrollPositions.MIN_WIDTH_600 : scrollPositions.MAX_WIDTH_599;
-        if (genreButtonCounter < breakpoints.length) {
+        if (genreButtonCounter < breakpoints.length - 1) {
             genreButtonCounter++;
             scrollToChild(breakpoints[genreButtonCounter]);
 
@@ -86,8 +86,8 @@ export default function Genres(props) {
                     left: 0,
                     behavior: 'instant'
                 });
-                const prev_button = document.querySelector(`button[data-set=${props.genre}].prev-button`);
-                prev_button.classList.remove("active-button-prev");
+                // const prev_button = document.querySelector(`button[data-set=${props.genre}].prev-button`);
+                // prev_button.classList.remove("active-button-prev");
             };
         };
         window.addEventListener('resize', handleResize);
