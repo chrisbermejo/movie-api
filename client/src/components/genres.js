@@ -9,10 +9,7 @@ export default function Genres(props) {
     }
 
     const [movieData, setmovieData] = useState([]);
-
-    // const container = document.querySelector(`div[data-set=${props.genre}]`);
-
-    let genreButtonCounter = 0;
+    let [genreButtonCounter, setGenreButtonCounter] = useState(0)
 
     const next_button = document.querySelector(`button[data-set=${props.genre}].next-button`);
     const prev_button = document.querySelector(`button[data-set=${props.genre}].prev-button`);
@@ -21,85 +18,83 @@ export default function Genres(props) {
 
 
     const scrollToChild = (index) => {
+        console.log(genreButtonCounter)
         if (containerRef.current) {
-          const childElements = containerRef.current.getElementsByClassName('genre-poster-card');
-          if (childElements.length > index) {
-            const childElement = childElements[index];
-            childElement.scrollIntoView({
-              behavior: 'smooth',
-              block: 'nearest',
-              inline: 'start'
-            });
-    
-          }
+            const childElements = containerRef.current.getElementsByClassName('genre-poster-card');
+            if (childElements.length > index) {
+                const childElement = childElements[index];
+                childElement.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'nearest',
+                    inline: 'start'
+                });
+
+            }
         }
-      };
-      
+    };
 
 
-
-    const handlePrevButtonClick = () => {
-        if (genreButtonCounter == 1) {
-            scrollToChild(0);
-            prev_button.classList.remove("active-button-prev");
-            next_button.classList.add("active-button");
-            genreButtonCounter--;
-        }
-        else if (genreButtonCounter == 2) {
-            scrollToChild(6);
-            genreButtonCounter--;
-        }
-        else if (genreButtonCounter == 3) {
-            scrollToChild(12);
-            genreButtonCounter--;
-        }
-        else if(genreButtonCounter == 4){
-            scrollToChild(18);
-            genreButtonCounter--;
-        }
-        
+    const scrollPositions = {
+        MIN_WIDTH_1025: [0, 6, 12, 18, 24],
+        MIN_WIDTH_600: [0, 4, 8, 12, 16, 20, 24, 28],
+        MAX_WIDTH_599: [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28],
     };
 
     const handleNextButtonClick = () => {
+        setGenreButtonCounter(genreButtonCounter + 1);
+        const breakpoints = window.innerWidth >= 1025 ? scrollPositions.MIN_WIDTH_1025 : window.innerWidth >= 600 ? scrollPositions.MIN_WIDTH_600 : scrollPositions.MAX_WIDTH_599;
+        if (genreButtonCounter < breakpoints.length) {
+            scrollToChild(breakpoints[genreButtonCounter]);
 
-        if (genreButtonCounter == 0) {
-            scrollToChild(6);
-            prev_button.classList.add("active-button-prev");
-            genreButtonCounter++;
-        }
-        else if (genreButtonCounter == 1) {
-            scrollToChild(12);
-            genreButtonCounter++;
-        }
-        else if (genreButtonCounter == 2) {
-            scrollToChild(18);
-            genreButtonCounter++;
-        }
-        else if (genreButtonCounter == 3) {
-            scrollToChild(24);
-            genreButtonCounter++;
-            next_button.classList.remove("active-button");
+            if (genreButtonCounter === 1) {
+                prev_button.classList.add("active-button-prev");
+            }
+            if (genreButtonCounter === breakpoints.length - 1) {
+                next_button.classList.remove("active-button");
+            }
         }
     };
 
+    const handlePrevButtonClick = () => {
+        const breakpoints = window.innerWidth >= 1025 ? scrollPositions.MIN_WIDTH_1025 :
+            window.innerWidth >= 600 ? scrollPositions.MIN_WIDTH_600 :
+                scrollPositions.MAX_WIDTH_599;
+
+        if (genreButtonCounter > 0) {
+            setGenreButtonCounter(genreButtonCounter - 1);
+            scrollToChild(breakpoints[genreButtonCounter]);
+
+            if (genreButtonCounter === 0) {
+                prev_button.classList.remove("active-button-prev");
+                next_button.classList.add("active-button");
+            }
+            if (genreButtonCounter === breakpoints.length - 2) {
+                next_button.classList.add("active-button");
+            }
+
+        }
+    };
+
+
     useEffect(() => {
         getGenres().then(setmovieData);
-        if (containerRef.current) {
-            containerRef.current.scrollTop = 0;
-        }
+        const handleResize = () => {
+            if (containerRef.current) {
+                containerRef.current.scrollTo({
+                    top: 0,
+                    left: 0,
+                    behavior: 'instant'
+                });
+                setGenreButtonCounter(0);
+                const prev_button = document.querySelector(`button[data-set=${props.genre}].prev-button`);
+                prev_button.classList.remove("active-button-prev");
+            };
+        };
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('resize', handleResize);
+        };
     }, []);
-
-    // document.addEventListener("DOMContentLoaded", () => {
-    //     const container = document.querySelector(`div[data-set=${props.genre}]`);
-
-    //     if (!container) {
-    //         console.error("Container element not found");
-    //         return;
-    //     }
-
-    //     container.scrollLeft = 0;
-    // });
-
 
     return (
         <>

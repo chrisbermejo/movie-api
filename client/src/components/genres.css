@@ -1,8 +1,9 @@
 .genre-wrapper-container {
     position: relative;
+    padding: 0 1.5rem;
 }
 
-.genre-wrapper-container button{
+.genre-wrapper-container button {
     cursor: pointer;
 }
 
@@ -38,10 +39,6 @@ h2 {
     margin-bottom: 0;
 }
 
-.genre-container {
-    padding: 24px 0px;
-}
-
 .genre-header-text {
     padding-left: .75rem;
     position: relative;
@@ -64,6 +61,7 @@ h2 {
     align-content: center;
     align-items: center;
     margin-bottom: 24px;
+    padding: 0 1.5rem;
 }
 
 .genre-header-svg {
@@ -73,7 +71,7 @@ h2 {
 }
 
 .genre-container {
-    padding: 1.5rem 1.5rem;
+    padding: 1.5rem 0;
 }
 
 .genre-poster-card {
@@ -175,7 +173,7 @@ h2 {
     font-size: 17px;
 }
 
-.genre-poster-card-info-actions-trailer-a:hover{
+.genre-poster-card-info-actions-trailer-a:hover {
     background-color: rgba(255, 255, 255, 0.08);
 }
 
@@ -202,7 +200,7 @@ h2 {
     padding: 1.25rem .75rem;
     z-index: 5;
     position: absolute;
-    bottom: 50%;
+    bottom: 60%;
     transition: all .25s ease-out;
     opacity: 0;
 }
@@ -239,7 +237,7 @@ h2 {
     height: 2.6rem;
 }
 
-.genre-poster-card-info-actions-trailer-span{
+.genre-poster-card-info-actions-trailer-span {
     font-size: 17px;
 }
 
@@ -254,6 +252,7 @@ h2 {
     .genre-wrapper {
         grid-auto-columns: calc(25% - ((3 / 4) * .75rem) - .75rem);
         padding: 0 1rem;
+        padding-left: 0px;
     }
 }
 
@@ -264,9 +263,17 @@ h2 {
         margin: .5rem;
         background: #121212;
         margin-left: 0px;
+        padding-left: 24px;
     }
 
     .genre-header {
         padding-top: 1rem;
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .genre-wrapper-container {
+        padding-left: 0;
+        padding-right: 0;
     }
 }

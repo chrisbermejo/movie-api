@@ -136,7 +136,7 @@ a:any-link {
     font-weight: 600;
     font-size: 19px;
     padding: 24px 16px 0;
-    display: block;
+    display: flex;
     padding-top: 22px;
     height: 26px;
 }
@@ -286,6 +286,8 @@ a.up-next-footer:hover {
     overflow: hidden;
     text-overflow: ellipsis;
 }
+
+.up-next-footer-svg {}
 
 @media screen and (max-width: 1279px) {
     .trailer-body {
