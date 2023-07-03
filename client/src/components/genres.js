@@ -1,5 +1,6 @@
 import './genres.css'
 import React, { useEffect, useState, useRef } from 'react';
+
 export default function Genres(props) {
 
     async function getGenres() {
@@ -10,7 +11,7 @@ export default function Genres(props) {
 
     const [movieData, setmovieData] = useState([]);
 
-    let genreButtonCounter = 0
+    const [GenreButtonCounter, setGenreButtonCounter] = useState(0);
 
     const next_button = document.querySelector(`button[data-set=${props.genre}].next-button`);
     const prev_button = document.querySelector(`button[data-set=${props.genre}].prev-button`);
@@ -19,7 +20,7 @@ export default function Genres(props) {
 
 
     const scrollToChild = (index) => {
-        console.log(genreButtonCounter)
+        console.log(GenreButtonCounter)
         if (containerRef.current) {
             const childElements = containerRef.current.getElementsByClassName('genre-poster-card');
             if (childElements.length > index) {
@@ -42,39 +43,54 @@ export default function Genres(props) {
     };
 
     const handleNextButtonClick = () => {
-        const breakpoints = window.innerWidth >= 1025 ? scrollPositions.MIN_WIDTH_1025 : window.innerWidth >= 600 ? scrollPositions.MIN_WIDTH_600 : scrollPositions.MAX_WIDTH_599;
-        if (genreButtonCounter < breakpoints.length - 1) {
-            genreButtonCounter++;
-            scrollToChild(breakpoints[genreButtonCounter]);
+        const breakpoints = window.innerWidth >= 1025
+            ? scrollPositions.MIN_WIDTH_1025
+            : window.innerWidth >= 600
+                ? scrollPositions.MIN_WIDTH_600
+                : scrollPositions.MAX_WIDTH_599;
 
-            if (genreButtonCounter === 1) {
-                prev_button.classList.add("active-button-prev");
-            }
-            if (genreButtonCounter === breakpoints.length - 1) {
-                next_button.classList.remove("active-button");
-            }
+        if (GenreButtonCounter < breakpoints.length - 1) {
+            setGenreButtonCounter((prevCounter) => {
+                const newCounter = prevCounter + 1;
+                scrollToChild(breakpoints[newCounter]);
+
+                if (newCounter === 1) {
+                    prev_button.classList.add("active-button-prev");
+                }
+                if (newCounter === breakpoints.length - 1) {
+                    next_button.classList.remove("active-button");
+                }
+
+                return newCounter;
+            });
         }
     };
 
     const handlePrevButtonClick = () => {
-        const breakpoints = window.innerWidth >= 1025 ? scrollPositions.MIN_WIDTH_1025 :
-            window.innerWidth >= 600 ? scrollPositions.MIN_WIDTH_600 :
-                scrollPositions.MAX_WIDTH_599;
+        const breakpoints = window.innerWidth >= 1025
+            ? scrollPositions.MIN_WIDTH_1025
+            : window.innerWidth >= 600
+                ? scrollPositions.MIN_WIDTH_600
+                : scrollPositions.MAX_WIDTH_599;
 
-        if (genreButtonCounter > 0) {
-            genreButtonCounter--;
-            scrollToChild(breakpoints[genreButtonCounter]);
+        if (GenreButtonCounter > 0) {
+            setGenreButtonCounter((prevCounter) => {
+                const newCounter = prevCounter - 1;
+                scrollToChild(breakpoints[newCounter]);
 
-            if (genreButtonCounter === 0) {
-                prev_button.classList.remove("active-button-prev");
-                next_button.classList.add("active-button");
-            }
-            if (genreButtonCounter === breakpoints.length - 2) {
-                next_button.classList.add("active-button");
-            }
+                if (newCounter === 0) {
+                    prev_button.classList.remove("active-button-prev");
+                    next_button.classList.add("active-button");
+                }
+                if (newCounter === breakpoints.length - 2) {
+                    next_button.classList.add("active-button");
+                }
 
+                return newCounter;
+            });
         }
     };
+
 
 
     useEffect(() => {
@@ -86,8 +102,11 @@ export default function Genres(props) {
                     left: 0,
                     behavior: 'instant'
                 });
-                // const prev_button = document.querySelector(`button[data-set=${props.genre}].prev-button`);
-                // prev_button.classList.remove("active-button-prev");
+                const prev_button = document.querySelector(`button[data-set=${props.genre}].prev-button`);
+                prev_button.classList.remove("active-button-prev");
+                const next_button = document.querySelector(`button[data-set=${props.genre}].next-button`);
+                next_button.classList.add("active-button");
+                setGenreButtonCounter(0);
             };
         };
         window.addEventListener('resize', handleResize);

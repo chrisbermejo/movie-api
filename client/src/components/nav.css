@@ -146,6 +146,10 @@ nav {
     background-color: white;
 }
 
+.search-bar-button-res {
+    display: none;
+}
+
 .search-bar-button-svg {
     fill: #00000085;
 }
@@ -200,6 +204,10 @@ nav {
 
 .search-bar {
     position: relative;
+}
+
+.close-search-bar {
+    display: none;
 }
 
 @media screen and (max-width: 1279px) {
@@ -281,36 +289,110 @@ nav {
     }
 
     .search-bar-container .search-bar-category,
-    .search-bar-container .search-bar-input-container {
+    .search-bar-container {
+        display: none;
+    }
+
+    .search-bar-input-container {
         display: none;
     }
 
     .search-bar {
         justify-content: flex-end;
+        height: 100%;
     }
 
     .search-bar-container {
-        justify-content: flex-end;
-        background-color: #0d0d0d00;
-        margin-right: 0;
+        opacity: 0;
     }
 
     .search-bar-button {
-        justify-content: flex-end;
-        background-color: #0d0d0d00;
-        opacity: 1;
-    }
-
-    .search-bar-button {
-        padding-right: 0;
+        display: none;
     }
 
     .search-bar-button-svg {
-        fill: white
+        display: none;
     }
 
     .lang-container {
         padding-left: 4px;
         padding-right: 8px;
+    }
+
+    .search-bar-button-res {
+        order: 3;
+        display: flex;
+        cursor: pointer;
+    }
+
+    .search-bar-container {
+        -moz-box-align: center;
+        align-items: center;
+        display: flex;
+        left: 0px;
+        margin: 0px;
+        min-height: 3.5rem;
+        height: 0;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: none 0s ease 0s;
+        order: 3;
+        pointer-events: none;
+        position: absolute;
+        top: 0px;
+        visibility: visible;
+        width: 100%;
+        z-index: 1;
+    }
+
+    .logo-img-container {
+        margin-right: auto;
+    }
+
+    .search-bar-container-phone {
+        background-color: #1f1f1f;
+        opacity: 1;
+        transform: scale(1);
+        transition: opacity 0.2s ease 0s, transform 0.2s ease 0s;
+        visibility: visible;
+        pointer-events: auto;
+        z-index: 100;
+    }
+
+    .search-bar-input-container {
+        display: flex;
+        height: 100%;
+        padding-left: 0;
+        color: white;
+    }
+
+    .search-bar-input {
+        color: white;
+        background: transparent;
+        padding: 1rem 1rem 1rem 0.75rem;
+        height: 100%;
+        box-sizing: border-box;
+        font-size: 1rem;
+        font-weight: 500;
+    }
+
+    .search-bar-input::placeholder {
+        font-size: 1rem;
+    }
+
+    .close-search-bar {
+        padding: 12px;
+        margin: 4px;
+        display: flex;
+        cursor: pointer;
+    }
+
+    .close-search-bar:hover {
+        background-color: rgba(255, 255, 255, 0.11);
+        border-radius: 50%;
+    }
+
+    .menu-button-container {
+        min-height: 3rem;
     }
 }

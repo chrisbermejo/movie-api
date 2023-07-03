@@ -6,6 +6,10 @@
     border-top-style: solid;
 }
 
+.search-bar-input-suggestion-results:first-child {
+    border-top-width: 0;
+}
+
 .search-bar-input-suggestion-results:hover {
     background: rgba(255, 255, 255, 0.08);
 }
@@ -29,7 +33,6 @@
     font-size: 1rem;
     letter-spacing: .03125em;
     line-height: 1.5rem;
-    text-transform: none;
     font-weight: 500;
 }
 
@@ -47,7 +50,7 @@
     width: 100%;
 }
 
-.search-bar-input-suggestion-results-info span{
+.search-bar-input-suggestion-results-info span {
     color: rgba(255, 255, 255, 0.7);
 }
 
@@ -97,4 +100,10 @@
     height: 2.2em;
     width: 2.2em;
     fill: #3f3f3f;
+}
+
+@media screen and (max-width: 600px) {
+    .search-bar-input-suggestions {
+        top: 100%;
+    }
 }

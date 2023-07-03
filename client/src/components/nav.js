@@ -1,8 +1,19 @@
 import './nav.css';
-import React from 'react';
+import React, { useRef } from 'react';
 import SearchSuggestions from '../components/search-bar-suggestions';
 
-export default function getNav() {
+const Nav = () => {
+
+    const searchBarContainer = useRef(null);
+
+    const openSearchBar = () => {
+        searchBarContainer.current.classList.add('search-bar-container-phone');
+    };
+
+    const closeSearchBar = () => {
+        searchBarContainer.current.classList.remove('search-bar-container-phone');
+    };
+
     return (
         <nav>
             <div className='nav-container'>
@@ -15,16 +26,21 @@ export default function getNav() {
                     </svg>
                     <span>Menu</span>
                 </div>
-                <div className='search-bar-container'>
+                <div className='search-bar-container' ref={searchBarContainer}>
                     <div className='search-bar'>
                         <div className='search-bar-category'>All</div>
-                        <SearchSuggestions />
+                        <SearchSuggestions closeSearchBarFunc={closeSearchBar} />
                         <button className='search-bar-button nav-container-items'>
                             <svg className='search-bar-button-svg' width="24" height="24" viewBox="0 0 24 24">
                                 <path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 0 0 1.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 0 0-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 0 0 5.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
                             </svg>
                         </button>
                     </div>
+                </div>
+                <div className='search-bar-button-res' onClick={openSearchBar}>
+                    <svg className='search-bar-button-svg-res' width="24" height="24" viewBox="0 0 24 24">
+                        <path d="M15.5 14h-.79l-.28-.27a6.5 6.5 0 0 0 1.48-5.34c-.47-2.78-2.79-5-5.59-5.34a6.505 6.505 0 0 0-7.27 7.27c.34 2.8 2.56 5.12 5.34 5.59a6.5 6.5 0 0 0 5.34-1.48l.27.28v.79l4.25 4.25c.41.41 1.08.41 1.49 0 .41-.41.41-1.08 0-1.49L15.5 14zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"></path>
+                    </svg>
                 </div>
                 <div className='imdbpro-container nav-container-items'>
                     <a href='https://pro.imdb.com/login/ap?u=/login/lwa&imdbPageAction=signUp&rf=cons_nb_hm&ref_=cons_nb_hm'>
@@ -58,3 +74,5 @@ export default function getNav() {
         </nav>
     );
 }
+
+export default Nav;
