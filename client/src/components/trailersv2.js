@@ -7,39 +7,60 @@ export default function GetTrailers() {
     const containerRef = useRef(null);
     const [counter, setCounter] = useState(1);
 
-    const scrollToChild = (index) => {
+    const scrollToChild = (index, button) => {
         if (containerRef.current) {
-            containerRef.current.style.transition = 'transform 0.3s ease';
-            const childElements = containerRef.current.getElementsByClassName(
-                'slide-trailer-card'
-            );
-            const childCount = childElements.length;
-
-            if (childCount > 0) {
-                let adjustedIndex = index;
-
-                if (index >= childCount) {
-                    adjustedIndex = index % childCount;
-                } else if (index < 0) {
-                    adjustedIndex = childCount - Math.abs(index % childCount);
-                }
-
-                const childElement = childElements[adjustedIndex];
-                const scrollAmount =
-                    childElement.offsetLeft -
-                    containerRef.current.offsetWidth / 2 +
-                    childElement.offsetWidth / 2 +
-                    parseFloat(getComputedStyle(childElement).marginLeft) +
-                    parseFloat(getComputedStyle(childElement).marginRight);
-                containerRef.current.style.transform = `translateX(${-scrollAmount}px)`;
+          containerRef.current.style.transition = 'transform 0.3s ease';
+          const childElements = containerRef.current.getElementsByClassName('slide-trailer-card');
+          const childCount = childElements.length;
+      
+          if (childCount > 0) {
+            let adjustedIndex = index;
+      
+            if (index >= childCount) {
+              adjustedIndex = index % childCount;
+            } else if (index < 0) {
+              adjustedIndex = childCount - Math.abs(index % childCount);
             }
+            console.log(`counter: ${index} | index: ${adjustedIndex}`)
+            const childElement = childElements[adjustedIndex];
+            const scrollAmount =
+              childElement.offsetLeft -
+              containerRef.current.offsetWidth / 2 +
+              childElement.offsetWidth / 2;
+            containerRef.current.style.transform = `translateX(${-scrollAmount}px)`;
+      
+            if (adjustedIndex === 0 && button === 'next') {
+              containerRef.current.style.transition = '';
+              adjustedIndex++;
+              const childElement = childElements[adjustedIndex];
+              const scrollAmount =
+                childElement.offsetLeft -
+                containerRef.current.offsetWidth / 2 +
+                childElement.offsetWidth / 2;
+              containerRef.current.style.transform = `translateX(${-scrollAmount}px)`;
+              containerRef.current.style.transition = 'transform 0.3s ease';
+              setCounter(1);
+            } else if (adjustedIndex === childCount - 1 && button === 'prev') {
+              containerRef.current.style.transition = '';
+              adjustedIndex--;
+              const childElement = childElements[adjustedIndex];
+              const scrollAmount =
+                childElement.offsetLeft -
+                containerRef.current.offsetWidth / 2 +
+                childElement.offsetWidth / 2;
+              containerRef.current.style.transform = `translateX(${-scrollAmount}px)`;
+              containerRef.current.style.transition = 'transform 0.3s ease';
+              setCounter(childCount - 2);
+            }
+          }
         }
-    };
+      };
+      
 
     const handleNextButtonClick = () => {
         setCounter((prevCounter) => {
             const newCount = prevCounter + 1;
-            scrollToChild(newCount);
+            scrollToChild(newCount, 'next');
             return newCount;
         });
     };
@@ -47,7 +68,7 @@ export default function GetTrailers() {
     const handlePrevButtonClick = () => {
         setCounter((prevCounter) => {
             const newCount = prevCounter - 1;
-            scrollToChild(newCount);
+            scrollToChild(newCount, 'prev');
             return newCount;
         });
     }
