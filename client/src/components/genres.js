@@ -4,7 +4,7 @@ import React, { useEffect, useState, useRef } from 'react';
 export default function Genres(props) {
 
     async function getGenres() {
-        const response = await fetch('http://192.168.1.38:4000/api/genre/' + props.genre);
+        const response = await fetch('http://localhost:4000/api/genre/' + props.genre);
         const data = await response.json();
         return data;
     }
