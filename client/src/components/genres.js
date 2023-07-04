@@ -35,7 +35,6 @@ export default function Genres(props) {
         }
     };
 
-
     const scrollPositions = {
         MIN_WIDTH_1025: [0, 6, 12, 18, 24],
         MIN_WIDTH_600: [0, 4, 8, 12, 16, 20, 24, 28],
