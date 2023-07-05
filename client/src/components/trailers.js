@@ -93,29 +93,31 @@ export default function GetTrailers() {
         });
     }
 
+    const handleResize = () => {
+        const elements = document.getElementsByClassName('slide-img-MAIN');
+        const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+
+        if (window.innerWidth <= 1024) {
+            for (let i = 0; i < elements.length; i++) {
+                elements[i].style.width = `${window.innerWidth - scrollbarWidth}px`;
+            }
+        } else {
+            for (let i = 0; i < elements.length; i++) {
+                elements[i].style.width = '';
+            }
+        }
+    };
+
     const handleDataFetched = () => {
         setCounter(() => {
             startInterval();
+            handleResize();
             scrollToChild(1, 0);
             return 1;
         });
     };
 
     useEffect(() => {
-        const handleResize = () => {
-            const elements = document.getElementsByClassName('slide-img-MAIN');
-            const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
-
-            if (window.innerWidth <= 1024) {
-                for (let i = 0; i < elements.length; i++) {
-                    elements[i].style.width = `${window.innerWidth - scrollbarWidth}px`;
-                }
-            } else {
-                for (let i = 0; i < elements.length; i++) {
-                    elements[i].style.width = '';
-                }
-            }
-        };
 
         const handleDataFetched = () => {
             setCounter(() => {
