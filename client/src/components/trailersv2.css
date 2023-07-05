@@ -34,10 +34,10 @@
     border-radius: 4px;
     background: hsla(0, 0%, 7%, .45);
     border: 1px solid hsla(0, 0%, 100%, .7);
-    padding: 1.25rem .75rem;
+    padding: 18.5px 12px;
     z-index: 5;
     position: absolute;
-    bottom: 60%;
+    bottom: 58.3%;
     transition: all .25s ease-out;
 }
 
@@ -486,7 +486,7 @@ a.up-next-footer:hover {
     }
 }
 
-@media screen and (min-width: 480px) {
+@media screen and (max-width: 480px) {
     .slide-img-ovelay-text-play-header span:first-child {
         font-size: 1.25rem;
         letter-spacing: .0125em;
@@ -502,5 +502,41 @@ a.up-next-footer:hover {
         letter-spacing: .00937em;
         line-height: 1.25rem;
         text-transform: none;
+    }
+}
+
+@media screen and (max-width: 1279px) {
+    .trailer-aside {
+        width: unset;
+    }
+
+    .trialer-wrapper-container {
+        max-width: 667px;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .slide-img-MAIN {
+        width: 993px;
+    }
+
+    .trailer-aside {
+        height: unset;
+    }
+
+    .trialer-wrapper-container {
+        max-width: unset;
+    }
+
+    .App-container {
+        padding-top: 60px;
+    }
+
+    .up-next-footer {
+        position: absolute;
+        left: 0;
+        padding-left: 24px;
+        padding-top: 20px;
     }
 }

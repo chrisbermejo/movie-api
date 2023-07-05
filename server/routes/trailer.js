@@ -26,16 +26,16 @@ router.get('/', (req, res) => {
             $('.swiper-slide').each((index, element) => {
 
                 const imageURL = $(element).children('figure').children('div').children('div:last-child').children('div:first-child').children('img').attr('srcset');
-                
+
                 const posterURL = $(element).children('figure').children('div').children('div:first-child').children('div:nth-child(2)').children('img').attr('srcset');
-                
+
                 const title = $(element).children('figure').children('div').children('div:last-child').children('div:last-child').children('div:last-child').children('figcaption').children('div:last-child').children('div:first-child').children('span:first-child').text();
 
                 const time = $(element).children('figure').children('div').children('div:last-child').children('div:last-child').children('div:last-child').children('figcaption').children('div:last-child').children('div:first-child').children('span:last-child').text();
 
                 const subText = $(element).children('figure').children('div').children('div:last-child').children('div:last-child').children('div:last-child').children('figcaption').children('div:last-child').children('div:last-child').text();
-                
-                
+
+
                 const jsonItem = {
                     key: counter,
                     imageURL: imageURL,
@@ -47,6 +47,14 @@ router.get('/', (req, res) => {
                 jsonContentss.push(jsonItem);
                 counter++;
             });
+
+            if (jsonContentss.length > 0) {
+                const lastItem = jsonContentss[jsonContentss.length - 1];
+                const temp = { ...lastItem };
+                temp.key = 'dup';
+                jsonContentss.unshift(temp);
+            }
+
 
             res.send(jsonContentss);
         })

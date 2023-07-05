@@ -5,71 +5,74 @@ import itemPosterIMG from '../images/item-poster.jpg';
 export default function GetTrailers() {
 
     const containerRef = useRef(null);
-    const [counter, setCounter] = useState(1);
+    const [counter, setCounter] = useState(0);
 
     const intervalRef = useRef(null);
-      
+
     const startInterval = () => {
-          if (!intervalRef.current) {
+        if (!intervalRef.current) {
             intervalRef.current = setInterval(handleNextButtonClick, 5000);
-          }
+        }
     };
-      
+
     const stopInterval = () => {
-          if (intervalRef.current) {
+        if (intervalRef.current) {
             clearInterval(intervalRef.current);
             intervalRef.current = null;
-          }
-    };
-    
-    const scrollToChild = (index, button) => {
-        if (containerRef.current) {
-          containerRef.current.style.transition = 'transform 0.5s ease';
-          const childElements = containerRef.current.getElementsByClassName('slide-trailer-card');
-          const childCount = childElements.length;
-      
-          if (childCount > 0) {
-            let adjustedIndex = index;
-      
-            if (index >= childCount) {
-              adjustedIndex = index % childCount;
-            } else if (index < 0) {
-              adjustedIndex = childCount - Math.abs(index % childCount);
-            }
-            console.log(`counter: ${index} | index: ${adjustedIndex}`)
-            const childElement = childElements[adjustedIndex];
-            const scrollAmount =
-              childElement.offsetLeft -
-              containerRef.current.offsetWidth / 2 +
-              childElement.offsetWidth / 2;
-            containerRef.current.style.transform = `translateX(${-scrollAmount}px)`;
-      
-            if (adjustedIndex === 0 && button === 'next') {
-              containerRef.current.style.transition = '';
-              adjustedIndex++;
-              const childElement = childElements[adjustedIndex];
-              const scrollAmount =
-                childElement.offsetLeft -
-                containerRef.current.offsetWidth / 2 +
-                childElement.offsetWidth / 2;
-              containerRef.current.style.transform = `translateX(${-scrollAmount}px)`;
-              containerRef.current.style.transition = 'transform 0.5s ease';
-              setCounter(1);
-            } else if (adjustedIndex === childCount - 1 && button === 'prev') {
-              containerRef.current.style.transition = '';
-              adjustedIndex--;
-              const childElement = childElements[adjustedIndex];
-              const scrollAmount =
-                childElement.offsetLeft -
-                containerRef.current.offsetWidth / 2 +
-                childElement.offsetWidth / 2;
-              containerRef.current.style.transform = `translateX(${-scrollAmount}px)`;
-              containerRef.current.style.transition = 'transform 0.5s ease';
-              setCounter(childCount - 2);
-            }
-          }
         }
-      };
+    };
+
+    const scrollToChild = (index, button) => {
+        console.log(counter)
+        if (containerRef.current) {
+            containerRef.current.style.transition = '';
+            if (button != false) {
+                containerRef.current.style.transition = 'transform 0.5s ease';
+            }
+            const childElements = containerRef.current.getElementsByClassName('slide-trailer-card');
+            const childCount = childElements.length;
+
+            if (childCount > 0) {
+                let adjustedIndex = index;
+
+                if (index >= childCount) {
+                    adjustedIndex = index % childCount;
+                } else if (index < 0) {
+                    adjustedIndex = childCount - Math.abs(index % childCount);
+                }
+                const childElement = childElements[adjustedIndex];
+                const scrollAmount =
+                    childElement.offsetLeft -
+                    containerRef.current.offsetWidth / 2 +
+                    childElement.offsetWidth / 2;
+                containerRef.current.style.transform = `translateX(${-scrollAmount}px)`;
+
+                if (adjustedIndex === 0 && button === 'next') {
+                    containerRef.current.style.transition = '';
+                    adjustedIndex++;
+                    const childElement = childElements[adjustedIndex];
+                    const scrollAmount =
+                        childElement.offsetLeft -
+                        containerRef.current.offsetWidth / 2 +
+                        childElement.offsetWidth / 2;
+                    containerRef.current.style.transform = `translateX(${-scrollAmount}px)`;
+                    containerRef.current.style.transition = 'transform 0.5s ease';
+                    setCounter(1);
+                } else if (adjustedIndex === childCount - 1 && button === 'prev') {
+                    containerRef.current.style.transition = '';
+                    adjustedIndex--;
+                    const childElement = childElements[adjustedIndex];
+                    const scrollAmount =
+                        childElement.offsetLeft -
+                        containerRef.current.offsetWidth / 2 +
+                        childElement.offsetWidth / 2;
+                    containerRef.current.style.transform = `translateX(${-scrollAmount}px)`;
+                    containerRef.current.style.transition = 'transform 0.5s ease';
+                    setCounter(childCount - 2);
+                }
+            }
+        }
+    };
 
     const handleNextButtonClick = () => {
         setCounter((prevCounter) => {
@@ -89,25 +92,42 @@ export default function GetTrailers() {
     }
 
     useEffect(() => {
-        getTrailersData().then(setTrailerData);
+        const handleResize = () => {
+            const elements = document.getElementsByClassName('slide-img-MAIN');
+            if (window.innerWidth <= 1024) {
+                console.log(elements.length);
+                for (let i = 0; i < elements.length; i++) {
+                    elements[i].style.width = `${window.innerWidth - 31}px`;
+                }
+            } else {
+                for (let i = 0; i < elements.length; i++) {
+                    elements[i].style.width = ``;
+                }
+            }
+        };
 
-        // if (containerRef.current) {
-        //     const childElements = containerRef.current.getElementsByClassName(
-        //         'slide-trailer-card'
-        //     );
-        //     const childElement = childElements[1];
-        //     const scrollAmount =
-        //         childElement.offsetLeft -
-        //         containerRef.current.offsetWidth / 2 +
-        //         childElement.offsetWidth / 2 +
-        //         parseFloat(getComputedStyle(childElement).marginLeft) +
-        //         parseFloat(getComputedStyle(childElement).marginRight);
-        //     containerRef.current.style.transform = `translateX(${-scrollAmount}px)`;
-        // }
-        startInterval();
-    
+        const handleButtonClick = (index) => {
+            setCounter(() => {
+                const newCount = index;
+                scrollToChild(newCount, 0);
+                return newCount;
+            });
+        };
+
+        getTrailersData().then(setTrailerData);
+        handleResize();
+
+        window.addEventListener('resize', () => {
+            stopInterval();
+            handleResize();
+            handleButtonClick(0)
+        });
         return () => {
-          stopInterval();
+            window.addEventListener('resize', () => {
+                stopInterval();
+                handleResize();
+            });
+            stopInterval();
         };
     }, []);
 
@@ -118,8 +138,6 @@ export default function GetTrailers() {
     }
 
     const [trailerData, setTrailerData] = useState([]);
-
-    const trailer = trailerData[13] || {};
 
     return (
         <>
@@ -138,78 +156,43 @@ export default function GetTrailers() {
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" role="presentation"><path d="M5.622.631A2.153 2.153 0 0 0 5 2.147c0 .568.224 1.113.622 1.515l8.249 8.34-8.25 8.34a2.16 2.16 0 0 0-.548 2.07c.196.74.768 1.317 1.499 1.515a2.104 2.104 0 0 0 2.048-.555l9.758-9.866a2.153 2.153 0 0 0 0-3.03L8.62.61C7.812-.207 6.45-.207 5.622.63z"></path></svg>
                         </button>
                         <div className='trailer-wrapper' ref={containerRef}>
-                        <div className='slide-trailer-card'>
-                            <div className='slide-img'>
-                                <img className='slide-img-MAIN' alt={trailer.title} srcSet={trailer.imageURL} width='165px' />
-                                <div className='slide-img-overlay-container'>
-                                    <div className='slide-img-overlay-text'>
-                                        <div className='slide-img-overlay-text-play'>
-                                            <svg width="24" height="24" viewBox="0 0 24 24"><path d="M10.803 15.932l4.688-3.513a.498.498 0 0 0 0-.803l-4.688-3.514a.502.502 0 0 0-.803.402v7.026c0 .412.472.653.803.402z"></path><path d="M12 24C5.373 24 0 18.627 0 12S5.373 0 12 0s12 5.373 12 12-5.373 12-12 12zm0-1c6.075 0 11-4.925 11-11S18.075 1 12 1 1 5.925 1 12s4.925 11 11 11z"></path></svg>
-                                            <span className='slide-img-overlay-text-play-time' >{trailer.time}</span>
-                                        </div>
-                                        <div className='slide-img-ovelay-text-play-header-con'>
-                                            <div className='slide-img-ovelay-text-play-header'>
-                                                <span>{trailer.title}</span>
-                                                <span >{trailer.time}</span>
+                            {trailerData.map(trailer => (
+                                <div className='slide-trailer-card' key={trailer.key} datatype={trailer.key}>
+                                    <div className='slide-img'>
+                                        <img className='slide-img-MAIN' alt={trailer.title} srcSet={trailer.imageURL} width='165px' />
+                                        <div className='slide-img-overlay-container'>
+                                            <div className='slide-img-overlay-text'>
+                                                <div className='slide-img-overlay-text-play'>
+                                                    <svg width="24" height="24" viewBox="0 0 24 24"><path d="M10.803 15.932l4.688-3.513a.498.498 0 0 0 0-.803l-4.688-3.514a.502.502 0 0 0-.803.402v7.026c0 .412.472.653.803.402z"></path><path d="M12 24C5.373 24 0 18.627 0 12S5.373 0 12 0s12 5.373 12 12-5.373 12-12 12zm0-1c6.075 0 11-4.925 11-11S18.075 1 12 1 1 5.925 1 12s4.925 11 11 11z"></path></svg>
+                                                    <span className='slide-img-overlay-text-play-time' >{trailer.time}</span>
+                                                </div>
+                                                <div className='slide-img-ovelay-text-play-header-con'>
+                                                    <div className='slide-img-ovelay-text-play-header'>
+                                                        <span>{trailer.title}</span>
+                                                        <span >{trailer.time}</span>
+                                                    </div>
+                                                    <div className='slide-img-ovelay-text-play-subheader'>{trailer.subText}</div>
+                                                </div>
                                             </div>
-                                            <div className='slide-img-ovelay-text-play-subheader'>{trailer.subText}</div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div className='slide-img-overlay'>
-                                    <div className='slide-img-poster-ribbon'>
-                                        <svg className="slide-img-poster-ribbon-svg" width="24px" height="34px" viewBox="0 0 24 34">
-                                            <polygon className="svg-polygon-1" fill="#000000" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343"></polygon>
-                                            <polygon className="svg-polygon-2" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343"></polygon>
-                                            <polygon className="svg-polygon-3" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049"></polygon>
-                                        </svg>
-                                        <div className='slide-img-poster-ribbon-overlay' >
-                                            <svg width="24" height="24" viewBox="0 0 24 24" ><path d="M18 13h-5v5c0 .55-.45 1-1 1s-1-.45-1-1v-5H6c-.55 0-1-.45-1-1s.45-1 1-1h5V6c0-.55.45-1 1-1s1 .45 1 1v5h5c.55 0 1 .45 1 1s-.45 1-1 1z"></path></svg>
-                                        </div>
-                                    </div>
-                                    <div className='slide-img-poster'>
-                                        <img alt={trailer.title} srcSet={trailer.posterURL} width="165px" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        {trailerData.map(trailer => (
-                            <div className='slide-trailer-card'>
-                            <div className='slide-img'>
-                                <img className='slide-img-MAIN' alt={trailer.title} srcSet={trailer.imageURL} width='165px' />
-                                <div className='slide-img-overlay-container'>
-                                    <div className='slide-img-overlay-text'>
-                                        <div className='slide-img-overlay-text-play'>
-                                            <svg width="24" height="24" viewBox="0 0 24 24"><path d="M10.803 15.932l4.688-3.513a.498.498 0 0 0 0-.803l-4.688-3.514a.502.502 0 0 0-.803.402v7.026c0 .412.472.653.803.402z"></path><path d="M12 24C5.373 24 0 18.627 0 12S5.373 0 12 0s12 5.373 12 12-5.373 12-12 12zm0-1c6.075 0 11-4.925 11-11S18.075 1 12 1 1 5.925 1 12s4.925 11 11 11z"></path></svg>
-                                            <span className='slide-img-overlay-text-play-time' >{trailer.time}</span>
-                                        </div>
-                                        <div className='slide-img-ovelay-text-play-header-con'>
-                                            <div className='slide-img-ovelay-text-play-header'>
-                                                <span>{trailer.title}</span>
-                                                <span >{trailer.time}</span>
+                                        <div className='slide-img-overlay'>
+                                            <div className='slide-img-poster-ribbon'>
+                                                <svg className="slide-img-poster-ribbon-svg" width="24px" height="34px" viewBox="0 0 24 34">
+                                                    <polygon className="svg-polygon-1" fill="#000000" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343"></polygon>
+                                                    <polygon className="svg-polygon-2" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343"></polygon>
+                                                    <polygon className="svg-polygon-3" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049"></polygon>
+                                                </svg>
+                                                <div className='slide-img-poster-ribbon-overlay' >
+                                                    <svg width="24" height="24" viewBox="0 0 24 24" ><path d="M18 13h-5v5c0 .55-.45 1-1 1s-1-.45-1-1v-5H6c-.55 0-1-.45-1-1s.45-1 1-1h5V6c0-.55.45-1 1-1s1 .45 1 1v5h5c.55 0 1 .45 1 1s-.45 1-1 1z"></path></svg>
+                                                </div>
                                             </div>
-                                            <div className='slide-img-ovelay-text-play-subheader'>{trailer.subText}</div>
+                                            <div className='slide-img-poster'>
+                                                <img alt={trailer.title} srcSet={trailer.posterURL} width="165px" />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                                <div className='slide-img-overlay'>
-                                    <div className='slide-img-poster-ribbon'>
-                                        <svg className="slide-img-poster-ribbon-svg" width="24px" height="34px" viewBox="0 0 24 34">
-                                            <polygon className="svg-polygon-1" fill="#000000" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343"></polygon>
-                                            <polygon className="svg-polygon-2" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343"></polygon>
-                                            <polygon className="svg-polygon-3" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049"></polygon>
-                                        </svg>
-                                        <div className='slide-img-poster-ribbon-overlay' >
-                                            <svg width="24" height="24" viewBox="0 0 24 24" ><path d="M18 13h-5v5c0 .55-.45 1-1 1s-1-.45-1-1v-5H6c-.55 0-1-.45-1-1s.45-1 1-1h5V6c0-.55.45-1 1-1s1 .45 1 1v5h5c.55 0 1 .45 1 1s-.45 1-1 1z"></path></svg>
-                                        </div>
-                                    </div>
-                                    <div className='slide-img-poster'>
-                                        <img alt={trailer.title} srcSet={trailer.posterURL} width="165px" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        ))}
+                            ))}
                         </div>
                     </div>
                     <aside className='trailer-aside'>
