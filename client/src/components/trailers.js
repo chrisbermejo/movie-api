@@ -1,45 +1,163 @@
 import './trailers.css';
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import YourComponent from './getTrailerData';
 import itemPosterIMG from '../images/item-poster.jpg';
 
-export default function getTrailers() {
+export default function GetTrailers() {
+
+    const containerRef = useRef(null);
+
+    const [counter, setCounter] = useState(0);
+
+    const intervalRef = useRef(null);
+
+    const startInterval = () => {
+        if (!intervalRef.current) {
+            intervalRef.current = setInterval(handleNextButtonClick, 5000);
+        }
+    };
+
+    const stopInterval = () => {
+        if (intervalRef.current) {
+            clearInterval(intervalRef.current);
+            intervalRef.current = null;
+        }
+    };
+
+    const scrollToChild = (index, button) => {
+        console.log(counter)
+        if (containerRef.current) {
+            containerRef.current.style.transition = '';
+            if (button != false) {
+                containerRef.current.style.transition = 'transform 0.5s ease';
+            }
+            const childElements = containerRef.current.getElementsByClassName('slide-trailer-card');
+            const childCount = childElements.length;
+
+            if (childCount > 0) {
+                let adjustedIndex = index;
+
+                if (index >= childCount) {
+                    adjustedIndex = index % childCount;
+                } else if (index < 0) {
+                    adjustedIndex = childCount - Math.abs(index % childCount);
+                }
+                const childElement = childElements[adjustedIndex];
+                const scrollAmount =
+                    childElement.offsetLeft -
+                    containerRef.current.offsetWidth / 2 +
+                    childElement.offsetWidth / 2;
+                containerRef.current.style.transform = `translateX(${-scrollAmount}px)`;
+
+                if (adjustedIndex === 0 && button === 'next') {
+                    containerRef.current.style.transition = '';
+                    adjustedIndex++;
+                    const childElement = childElements[adjustedIndex];
+                    const scrollAmount =
+                        childElement.offsetLeft -
+                        containerRef.current.offsetWidth / 2 +
+                        childElement.offsetWidth / 2;
+                    containerRef.current.style.transform = `translateX(${-scrollAmount}px)`;
+                    containerRef.current.style.transition = 'transform 0.5s ease';
+                    setCounter(1);
+                } else if (adjustedIndex === childCount - 1 && button === 'prev') {
+                    containerRef.current.style.transition = '';
+                    adjustedIndex--;
+                    const childElement = childElements[adjustedIndex];
+                    const scrollAmount =
+                        childElement.offsetLeft -
+                        containerRef.current.offsetWidth / 2 +
+                        childElement.offsetWidth / 2;
+                    containerRef.current.style.transform = `translateX(${-scrollAmount}px)`;
+                    containerRef.current.style.transition = 'transform 0.5s ease';
+                    setCounter(childCount - 2);
+                }
+            }
+        }
+    };
+
+    const handleNextButtonClick = () => {
+        setCounter((prevCounter) => {
+            const newCount = prevCounter + 1;
+            scrollToChild(newCount, 'next');
+            return newCount;
+        });
+    };
+
+    const handlePrevButtonClick = () => {
+        stopInterval();
+        setCounter((prevCounter) => {
+            const newCount = prevCounter - 1;
+            scrollToChild(newCount, 'prev');
+            return newCount;
+        });
+    }
+
+    const handleDataFetched = () => {
+        setCounter(() => {
+            startInterval();
+            scrollToChild(1, 0);
+            return 1;
+        });
+    };
+
+    useEffect(() => {
+        const handleResize = () => {
+            const elements = document.getElementsByClassName('slide-img-MAIN');
+            const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
+
+            if (window.innerWidth <= 1024) {
+                for (let i = 0; i < elements.length; i++) {
+                    elements[i].style.width = `${window.innerWidth - scrollbarWidth}px`;
+                }
+            } else {
+                for (let i = 0; i < elements.length; i++) {
+                    elements[i].style.width = '';
+                }
+            }
+        };
+
+        const handleDataFetched = () => {
+            setCounter(() => {
+                scrollToChild(1, 0);
+                return 1;
+            });
+        };
+
+        handleResize();
+
+        window.addEventListener('resize', () => {
+            stopInterval();
+            handleResize();
+            handleDataFetched();
+        });
+        return () => {
+            window.addEventListener('resize', () => {
+                stopInterval();
+                handleResize();
+            });
+            stopInterval();
+        };
+    }, []);
+
     return (
         <>
             <div className='trailer-body'>
                 <div className='trailer-container'>
-                    <div className='slide-img-container'>
-                        <div className='slide-img'>
-                            <img className='slide-img-MAIN' alt="One Piece;" srcSet="https://m.media-amazon.com/images/M/MV5BZmQ0OGZkYzktZWZiYy00ZDliLThhNmMtODM0ZjU3ZTIxZmM5XkEyXkFqcGdeQXZ3ZXNsZXk@._CR53,74,1570,883_QL75_UY281_CR0,0,500,281_.jpg" width='165px' />
-                            <div className='slide-img-overlay-container'>
-                                <div className='slide-img-overlay-text'>
-                                    <div className='slide-img-overlay-text-play'>
-                                        <svg width="24" height="24" viewBox="0 0 24 24"><path d="M10.803 15.932l4.688-3.513a.498.498 0 0 0 0-.803l-4.688-3.514a.502.502 0 0 0-.803.402v7.026c0 .412.472.653.803.402z"></path><path d="M12 24C5.373 24 0 18.627 0 12S5.373 0 12 0s12 5.373 12 12-5.373 12-12 12zm0-1c6.075 0 11-4.925 11-11S18.075 1 12 1 1 5.925 1 12s4.925 11 11 11z"></path></svg>
-                                        <span className='slide-img-overlay-text-play-time' >1:29</span>
-                                    </div>
-                                    <div className='slide-img-ovelay-text-play-header-con'>
-                                        <div className='slide-img-ovelay-text-play-header'>
-                                            <span >"One Piece"</span>
-                                            <span >1:29</span>
-                                        </div>
-                                        <div className='slide-img-ovelay-text-play-subheader'>The Manga Adaptation Comes to Netflix</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className='slide-img-overlay'>
-                                <div className='slide-img-poster-ribbon'>
-                                    <svg className="slide-img-poster-ribbon-svg" width="24px" height="34px" viewBox="0 0 24 34">
-                                        <polygon className="svg-polygon-1" fill="#000000" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343"></polygon>
-                                        <polygon className="svg-polygon-2" points="24 0 0 0 0 32 12.2436611 26.2926049 24 31.7728343"></polygon>
-                                        <polygon className="svg-polygon-3" points="24 31.7728343 24 33.7728343 12.2436611 28.2926049 0 34 0 32 12.2436611 26.2926049"></polygon>
-                                    </svg>
-                                    <div className='slide-img-poster-ribbon-overlay' >
-                                        <svg width="24" height="24" viewBox="0 0 24 24" ><path d="M18 13h-5v5c0 .55-.45 1-1 1s-1-.45-1-1v-5H6c-.55 0-1-.45-1-1s.45-1 1-1h5V6c0-.55.45-1 1-1s1 .45 1 1v5h5c.55 0 1 .45 1 1s-.45 1-1 1z"></path></svg>
-                                    </div>
-                                </div>
-                                <div className='slide-img-poster'>
-                                    <img alt="One Piece" srcSet="https://m.media-amazon.com/images/M/MV5BYzczMzllN2UtNDJmOS00MmE5LWE2MWYtNGEwODcwMDc2M2YyXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_QL75_UY207_CR4,0,140,207_.jpg 140w, https://m.media-amazon.com/images/M/MV5BYzczMzllN2UtNDJmOS00MmE5LWE2MWYtNGEwODcwMDc2M2YyXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_QL75_UY311_CR6,0,210,311_.jpg 210w, https://m.media-amazon.com/images/M/MV5BYzczMzllN2UtNDJmOS00MmE5LWE2MWYtNGEwODcwMDc2M2YyXkEyXkFqcGdeQXVyMDM2NDM2MQ@@._V1_QL75_UY414_CR8,0,280,414_.jpg 280w" sizes="50vw, (min-width: 480px) 34vw, (min-width: 600px) 26vw, (min-width: 1024px) 16vw, (min-width: 1280px) 16vw" width="165px" />
-                                </div>
-                            </div>
+                    <div className='trialer-wrapper-container'>
+                        <button className='trailer-prev-button' onClick={handlePrevButtonClick}>
+                            <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" role="presentation">
+                                <path d="M18.378 23.369c.398-.402.622-.947.622-1.516 0-.568-.224-1.113-.622-1.515l-8.249-8.34 8.25-8.34a2.16 2.16 0 0 0 .548-2.07A2.132 2.132 0 0 0 17.428.073a2.104 2.104 0 0 0-2.048.555l-9.758 9.866A2.153 2.153 0 0 0 5 12.009c0 .568.224 1.114.622 1.515l9.758 9.866c.808.817 2.17.817 2.998-.021z"></path>
+                            </svg>
+                        </button>
+                        <button className='trailer-next-button' onClick={() => {
+                            handleNextButtonClick();
+                            stopInterval();
+                        }}>
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" role="presentation"><path d="M5.622.631A2.153 2.153 0 0 0 5 2.147c0 .568.224 1.113.622 1.515l8.249 8.34-8.25 8.34a2.16 2.16 0 0 0-.548 2.07c.196.74.768 1.317 1.499 1.515a2.104 2.104 0 0 0 2.048-.555l9.758-9.866a2.153 2.153 0 0 0 0-3.03L8.62.61C7.812-.207 6.45-.207 5.622.63z"></path></svg>
+                        </button>
+                        <div className='trailer-wrapper' ref={containerRef}>
+                            <YourComponent onDataFetched={handleDataFetched} />
                         </div>
                     </div>
                     <aside className='trailer-aside'>
