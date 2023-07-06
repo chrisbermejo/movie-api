@@ -55,19 +55,19 @@ export default function GetTrailers() {
                     containerRef.current.offsetWidth / 2 +
                     childElement.offsetWidth / 2;
 
-                if (asideRef.current) {
-                    const asideContainer = asideRef.current;
-                    const asideChild = asideContainer.querySelector('.up-next-item');
-                    if (asideChild) {
-                        const asideItemHeight = asideChild.offsetHeight;
-                        const asideContainerHeight = asideContainer.offsetHeight;
-                        const asideScrollAmount = index * (((asideItemHeight - asideContainerHeight) / 2));
-                        asideContainer.style.transform = `translateY(${asideScrollAmount}px)`;
-                        console.log(index)
-                        console.log(asideItemHeight - asideContainerHeight)
-                        console.log(asideScrollAmount);
-                    }
-                }
+                // if (asideRef.current) {
+                //     const asideContainer = asideRef.current;
+                //     const asideChild = asideContainer.querySelector('.up-next-item');
+                //     if (asideChild) {
+                //         const asideItemHeight = asideChild.offsetHeight;
+                //         const asideContainerHeight = asideContainer.offsetHeight;
+                //         const asideScrollAmount = index * (((asideItemHeight - asideContainerHeight) / 2));
+                //         asideContainer.style.transform = `translateY(${asideScrollAmount}px)`;
+                //         console.log(index)
+                //         console.log(asideItemHeight - asideContainerHeight)
+                //         console.log(asideScrollAmount);
+                //     }
+                // }
 
                 containerRef.current.style.transform = `translateX(${-scrollAmount}px)`;
 
@@ -186,7 +186,7 @@ export default function GetTrailers() {
                             <span>Up next</span>
                         </div>
                         <div className='up-next-header-con'>
-                            <div className='up-next-container' ref={asideRef} style={{ transform: 'translateY(-148px)' }}>
+                            <div className='up-next-container' ref={asideRef} style={{ transform: 'translateY(-444px)' }}>
                                 <UpNext data={dataFromChild} />
                             </div>
                         </div>

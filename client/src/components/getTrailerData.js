@@ -5,13 +5,16 @@ import { useQuery } from 'react-query';
 const YourComponent = ({ onDataFetched, fetchedData }) => {
 
     const fetchData = async () => {
+        console.log('fetching trailer api...')
         const response = await fetch('http://localhost:4000/api/trailer');
         const data = await response.json();
         fetchedData(data);
         return data;
     };
 
-    const { isLoading, data } = useQuery('data', fetchData);
+    const { isLoading, data } = useQuery('data', fetchData, {
+        refetchOnMount: false, // Disable automatic refetching on mount
+    });
     const isDataFetched = useRef(false);
 
     useEffect(() => {
