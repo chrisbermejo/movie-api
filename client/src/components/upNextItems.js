@@ -4,15 +4,18 @@ const YourComponent = ({ data }) => {
     const [count, setCount] = useState(0);
     const [updatedData, setUpdatedData] = useState([]);
 
-    useEffect(() => {
-        if (data.length > 2 && count === 0) {
-            const Data = [...data];
-            const top2 = Data.splice(1, 5);
-            data.push(...top2);
-            setUpdatedData(data);
-            setCount(1);
-        }
-    }, [data, count]);
+    // useEffect(() => {
+    //     if (data.length > 2 && count === 0) {
+    //         let counter = 99;
+    //         const Data = JSON.parse(JSON.stringify(data));
+    //         const top2 = Data.splice(1, 5);
+    //         data.push(...top2);
+    //         data.forEach((element) => {
+    //             counter++;
+    //             element.key = counter;
+    //         });
+    //     }
+    // }, [data, count]);
 
     return (
         <>

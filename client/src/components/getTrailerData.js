@@ -13,16 +13,8 @@ const YourComponent = ({ onDataFetched, fetchedData }) => {
     };
 
     const { isLoading, data } = useQuery('data', fetchData, {
-        refetchOnWindowFocus: false, // Disable automatic refetching on mount
+        refetchOnWindowFocus: false,
     });
-    const isDataFetched = useRef(false);
-
-    useEffect(() => {
-        if (!isLoading && data && !isDataFetched.current) {
-            onDataFetched();
-            isDataFetched.current = true;
-        }
-    }, [isLoading, data, onDataFetched]);
 
     if (isLoading) {
         return (

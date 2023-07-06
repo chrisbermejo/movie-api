@@ -71,28 +71,14 @@ export default function GetTrailers() {
 
                 containerRef.current.style.transform = `translateX(${-scrollAmount}px)`;
 
-                if (adjustedIndex === 0 && button === 'next') {
+                if ((adjustedIndex === 0 && button === 'next') || (adjustedIndex === childCount - 1 && button === 'prev')) {
                     containerRef.current.style.transition = '';
-                    adjustedIndex++;
+                    adjustedIndex += (button === 'next') ? 1 : -1;
                     const childElement = childElements[adjustedIndex];
-                    const scrollAmount =
-                        childElement.offsetLeft -
-                        containerRef.current.offsetWidth / 2 +
-                        childElement.offsetWidth / 2;
+                    const scrollAmount = childElement.offsetLeft - containerRef.current.offsetWidth / 2 + childElement.offsetWidth / 2;
                     containerRef.current.style.transform = `translateX(${-scrollAmount}px)`;
                     containerRef.current.style.transition = 'transform 0.5s ease';
-                    setCounter(1);
-                } else if (adjustedIndex === childCount - 1 && button === 'prev') {
-                    containerRef.current.style.transition = '';
-                    adjustedIndex--;
-                    const childElement = childElements[adjustedIndex];
-                    const scrollAmount =
-                        childElement.offsetLeft -
-                        containerRef.current.offsetWidth / 2 +
-                        childElement.offsetWidth / 2;
-                    containerRef.current.style.transform = `translateX(${-scrollAmount}px)`;
-                    containerRef.current.style.transition = 'transform 0.5s ease';
-                    setCounter(childCount - 2);
+                    setCounter(adjustedIndex);
                 }
             }
         }
