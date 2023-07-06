@@ -1,14 +1,16 @@
 import React, { useEffect, useRef } from 'react';
 import { useQuery } from 'react-query';
 
-const fetchData = async () => {
-    const response = await fetch('http://localhost:4000/api/trailer');
-    const data = await response.json();
-    return data;
-};
 
+const YourComponent = ({ onDataFetched, fetchedData }) => {
 
-const YourComponent = ({ onDataFetched }) => {
+    const fetchData = async () => {
+        const response = await fetch('http://localhost:4000/api/trailer');
+        const data = await response.json();
+        fetchedData(data);
+        return data;
+    };
+
     const { isLoading, data } = useQuery('data', fetchData);
     const isDataFetched = useRef(false);
 
