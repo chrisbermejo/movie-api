@@ -7,9 +7,9 @@ const YourComponent = ({ data }) => {
     useEffect(() => {
         if (data.length > 2 && count === 0) {
             const Data = [...data];
-            const top2 = Data.splice(0, 1);
-            Data.push(...top2);
-            setUpdatedData(Data);
+            const top2 = Data.splice(1, 5);
+            data.push(...top2);
+            setUpdatedData(data);
             setCount(1);
         }
     }, [data, count]);
