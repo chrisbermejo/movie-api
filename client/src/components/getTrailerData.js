@@ -1,33 +1,7 @@
-import React, { useEffect, useRef } from 'react';
-import { useQuery } from 'react-query';
+import React from 'react';;
 
 
-const YourComponent = ({ onDataFetched, fetchedData }) => {
-
-    const fetchData = async () => {
-        console.log('fetching trailer api...')
-        const response = await fetch('http://localhost:4000/api/trailer');
-        const data = await response.json();
-        fetchedData(data);
-        return data;
-    };
-
-    const { isLoading, data } = useQuery('data', fetchData, {
-        refetchOnWindowFocus: false,
-    });
-
-    if (isLoading) {
-        return (
-            <>
-                <div className="loading-animation">
-                    <div className="loader">
-                        <div className="loader-wheel"></div>
-                        <div className="loader-text"></div>
-                    </div>
-                </div>
-            </>
-        )
-    };
+const YourComponent = ({ data }) => {
 
     return (
         <>
