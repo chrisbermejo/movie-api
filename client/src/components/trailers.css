@@ -97,8 +97,7 @@
 
 .up-next-container {
     height: 444px;
-    max-width: 403px;
-    transition: all .25s ease-out;
+    width: 403px;
 }
 
 .up-next-item-img img {
@@ -329,6 +328,14 @@ a.up-next-footer:hover {
     align-items: center;
     justify-content: center;
     display: flex;
+}
+
+.up-next-container .loading-animation {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
 .loader {

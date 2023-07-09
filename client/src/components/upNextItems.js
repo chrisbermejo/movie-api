@@ -1,26 +1,31 @@
 import React, { useState, useEffect } from 'react';
 
 const YourComponent = ({ data }) => {
-    const [count, setCount] = useState(0);
+
     const [updatedData, setUpdatedData] = useState([]);
 
-    // useEffect(() => {
-    //     if (data.length > 2 && count === 0) {
-    //         let counter = 99;
-    //         const Data = JSON.parse(JSON.stringify(data));
-    //         const top2 = Data.splice(1, 5);
-    //         data.push(...top2);
-    //         data.forEach((element) => {
-    //             counter++;
-    //             element.key = counter;
-    //         });
-    //     }
-    // }, [data, count]);
+    useEffect(() => {
+        if (data.length !== 0) {
+            let counter = 99;
+            const jsonData = JSON.parse(JSON.stringify(data));
+            const jsonDataEdit = JSON.parse(JSON.stringify(jsonData));
+            const extractedElements = jsonDataEdit.splice(1, 5);
+            jsonData.push(...extractedElements);
+            const extractedElements2 = jsonDataEdit.splice(jsonDataEdit.length - 4, 2);
+            jsonData.unshift(...extractedElements2);
+            jsonData.forEach((element) => {
+                counter++;
+                element.key = counter;
+            });
+            setUpdatedData(jsonData);
+            console.log(jsonData);
+        }
+    }, []);
 
     return (
         <>
             {updatedData.map((item, index) => (
-                <div className='up-next-item'>
+                <div className='up-next-item' key={`${item.key}${item.key}`} datatype={item.key}>
                     <div className='up-next-item-img'>
                         <img src={item.posterURL} alt='poster' />
                     </div>
