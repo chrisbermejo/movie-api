@@ -1,6 +1,0 @@
-{
-  "dependencies": {
-    "querystring": "^0.2.1",
-    "react-query": "^3.39.3"
-  }
-}
