@@ -6,7 +6,6 @@ import './App.css';
 
 const queryClient = new QueryClient();
 
-
 export default function App() {
     return (
         <>

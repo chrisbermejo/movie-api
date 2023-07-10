@@ -1,5 +1,5 @@
 import './nav.css';
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import SearchSuggestions from '../components/search-bar-suggestions';
 
 const Nav = () => {

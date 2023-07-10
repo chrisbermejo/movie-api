@@ -1,4 +1,3 @@
-import React from 'react';
 import Genres from '../components/genres';
 import Nav from '../components/nav';
 import Trailers from '../components/trailers';
