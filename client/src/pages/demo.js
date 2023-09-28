@@ -3,7 +3,7 @@ import Nav from '../components/nav';
 import Trailers from '../components/trailers';
 import '../App.css';
 
-export default function Search() {
+export default function Demo() {
     const genreList = ['Action', 'Adventure', 'Animation', 'Comedy', 'Crime', 'Thriller', 'Horror'];
 
     return (

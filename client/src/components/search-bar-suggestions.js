@@ -7,7 +7,6 @@ const SearchBarSuggestions = ({ closeSearchBarFunc }) => {
     const [inputValue, setInputValue] = useState('');
     const [results, setResults] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(null);
     const suggestionsContainerRef = useRef(null);
     const searchBarInputRef = useRef(null);
 
@@ -15,7 +14,6 @@ const SearchBarSuggestions = ({ closeSearchBarFunc }) => {
 
     async function getSearchSuggestions(query) {
         setLoading(true);
-        setError(null);
 
         if (controller) {
             controller.abort();
@@ -30,7 +28,7 @@ const SearchBarSuggestions = ({ closeSearchBarFunc }) => {
             const data = await response.json();
             setResults(data);
         } catch (err) {
-            setError(err.message);
+            console.log(err.message);
         } finally {
             setLoading(false);
         }

@@ -1,7 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 
-import Main from './pages/main'
+import Demo from './pages/demo'
+import API from './pages/api'
 import './App.css';
 
 const queryClient = new QueryClient();
@@ -12,7 +13,8 @@ export default function App() {
             <QueryClientProvider client={queryClient}>
                 <BrowserRouter>
                     <Routes>
-                        <Route index element={<Main />} />
+                        <Route path='/' element={<API />} />
+                        <Route path='/demo' element={<Demo />} />
                     </Routes>
                 </BrowserRouter>
             </QueryClientProvider>

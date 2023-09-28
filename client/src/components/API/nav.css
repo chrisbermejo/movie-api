@@ -1,0 +1,24 @@
+.api-nav {
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 20px;
+}
+
+.api-header {
+    color: black;
+}
+
+.api-link {
+    display: flex;
+    align-items: center;
+}
+
+.api-link a {
+    color: black;
+}
+
+.api-nav-links {
+    display: flex;
+    gap: .5rem;
+}
