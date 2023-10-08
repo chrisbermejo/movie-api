@@ -8,7 +8,6 @@ import Loading from './loading';
 import './trailers.css';
 
 const fetchData = async () => {
-    console.log('fetching trailer api...')
     const response = await fetch('http://localhost:4000/api/trailer');
     const data = await response.json();
     return data;
@@ -129,10 +128,9 @@ const GetTrailers = () => {
     };
 
     const handleDataFetched = () => {
-        console.log('handleDataFetched function')
         setCounter(() => {
             scrollToChildTrailer(1, 0)
-            // startInterval();
+            startInterval();
             handleResize();
             return 1;
         });

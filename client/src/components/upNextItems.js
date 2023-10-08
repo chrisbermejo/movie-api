@@ -18,7 +18,6 @@ const YourComponent = ({ data }) => {
                 element.key = counter;
             });
             setUpdatedData(jsonData);
-            console.log(jsonData);
         }
     }, []);
 

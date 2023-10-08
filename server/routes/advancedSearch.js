@@ -3,12 +3,35 @@ const cheerio = require('cheerio');
 const axios = require('axios');
 const router = express.Router();
 
-router.get('/:genre', (req, res) => {
-    const url = 'https://www.imdb.com/search/title/?title_type=feature&num_votes=1,&genres=';
-    const input = req.params.genre;
-    const output = url + input;
+const instance = axios.create({
+    headers: {
+        'Accept-Language': 'en-US,en;q=0.9',
+        'Accept': 'application/json, text/plain, */*',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36',
+    },
+});
 
-    axios.get(output)
+router.get('/', (req, res) => {
+    let range = null;
+    let url = 'https://www.imdb.com/search/title/?';
+
+    const entries = Object.entries(req.query);
+
+    for (let i = 0; i < entries.length; i++) {
+        if (entries[i][0] === 'title' && entries[i][1] !== '') {
+            entries[i][1] = entries[i][1].split(' ').join('+');
+        }
+        if (entries[i][0] !== 'range' && entries[i][1] !== '') {
+            const [key, value] = entries[i];
+            url += key + '=' + value;
+            if (i < entries.length - 1) {
+                url += '&';
+            }
+        } else {
+            range = entries[i][1]
+        }
+    }
+    instance.get(url)
         .then(response => {
             // Load the HTML content of the web page into Cheerio
             const $ = cheerio.load(response.data);
@@ -17,7 +40,7 @@ router.get('/:genre', (req, res) => {
             let counter = 0;
             $('.lister-item.mode-advanced ').each((index, element) => {
 
-                if (counter >= 30) {
+                if (range ? counter >= range : counter >= 30) {
                     return false;
                 }
 
@@ -26,9 +49,13 @@ router.get('/:genre', (req, res) => {
                 const title = imdbText.text();
 
                 const temp_link = imdbText.attr('href');
-                const link = 'https://www.imdb.com/' + temp_link.split('?')[0] + 'reference';
+                const link = 'https://www.imdb.com/' + temp_link.split('?')[0];
 
                 const old_imageUrl = $(element).children('div.lister-item-image.float-left').children('a').children('img').attr('loadlate');
+
+                // if (old_imageUrl) {
+                //     image
+                // }
 
                 let new_imageUrl = ' ';
 
@@ -43,19 +70,17 @@ router.get('/:genre', (req, res) => {
                 }
 
                 const jsonItem = {
-                    key: counter,
                     title: title,
                     rating: imdbRating,
                     link: link,
-                    old_image: old_imageUrl,
-                    image: new_imageUrl
+                    poster: new_imageUrl
                 };
 
 
                 jsonContentss.push(jsonItem);
                 counter++;
             });
-            res.send(jsonContentss);
+            res.send(jsonContentss != false ? jsonContentss : { Error: 'Unable to find anything' });
         })
         .catch(error => {
             console.error('Error retrieving the web page:', error);

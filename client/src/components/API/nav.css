@@ -15,7 +15,13 @@
 }
 
 .api-link a {
-    color: black;
+    color: rgb(245, 197, 24);
+    background-color: rgb(43, 43, 43);
+    padding: 10px;
+    border-radius: 5px;
+    width: 3rem;
+    display: flex;
+    justify-content: center;
 }
 
 .api-nav-links {

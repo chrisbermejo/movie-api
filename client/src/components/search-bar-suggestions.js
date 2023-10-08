@@ -22,13 +22,13 @@ const SearchBarSuggestions = ({ closeSearchBarFunc }) => {
         controller = new AbortController();
 
         try {
-            const response = await fetch('http://192.168.1.38:4000/search/' + query, {
+            const response = await fetch('http://192.168.1.38:4000/api/search/' + query, {
                 signal: controller.signal,
             });
             const data = await response.json();
             setResults(data);
         } catch (err) {
-            console.log(err.message);
+            // console.log(err.message);
         } finally {
             setLoading(false);
         }

@@ -35,7 +35,8 @@ router.get('/', (req, res) => {
 
                 const subText = $(element).children('figure').children('div').children('div:last-child').children('div:last-child').children('div:last-child').children('figcaption').children('div:last-child').children('div:last-child').text();
 
-
+                console.log(title)
+                console.log(imageURL)
                 const jsonItem = {
                     key: counter,
                     imageURL: imageURL,

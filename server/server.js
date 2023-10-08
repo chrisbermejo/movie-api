@@ -1,10 +1,9 @@
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
-const router = require('./routes/search')
-const genreRouter = require('./routes/genre')
-const searchRouter = require('./routes/search')
+const basicSearch = require('./routes/basicSearch')
 const trailerRouter = require('./routes/trailer')
+const advancedSearch = require('./routes/advancedSearch');
 
 const app = express();
 
@@ -18,9 +17,8 @@ const corsOptions = {
 };
 
 app.use(cors(corsOptions));
-app.use('/', router);
-app.use('/api/genre/', genreRouter)
-app.use('/search', searchRouter)
+app.use('/api/advancedsearch', advancedSearch);
+app.use('/api/search', basicSearch)
 app.use('/api/trailer', trailerRouter)
 
 const port = 4000;

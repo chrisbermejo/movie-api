@@ -4,7 +4,7 @@ import { useEffect, useState, useRef } from 'react';
 export default function Genres(props) {
 
     async function getGenres() {
-        const response = await fetch('http://localhost:4000/api/genre/' + props.genre);
+        const response = await fetch('http://localhost:4000/api/advancedsearch/?genres=' + props.genre);
         const data = await response.json();
         return data;
     }
@@ -17,7 +17,6 @@ export default function Genres(props) {
     const prev_button = document.querySelector(`button[data-set=${props.genre}].prev-button`);
 
     const containerRef = useRef(null);
-
 
     const scrollToChild = (index) => {
         console.log(GenreButtonCounter)
@@ -131,8 +130,8 @@ export default function Genres(props) {
                         </svg>
                     </button>
                     <div className='genre-wrapper' data-set={props.genre} ref={containerRef}>
-                        {movieData.map(movie => (
-                            <div key={movie.key} className='genre-poster-card'>
+                        {movieData.map((movie, key) => (
+                            <div key={key} className='genre-poster-card'>
                                 <div className='genre-poster-card-image'>
                                     <div className='genre-poster-card-image-ribbon ribbon-m'>
                                         <svg className="genre-poster-card-image-svg" width="24px" height="34px" viewBox="0 0 24 34">
@@ -145,7 +144,7 @@ export default function Genres(props) {
                                         </div>
                                     </div>
                                     <a className='genre-poster-card-image-a' href={movie.link}>
-                                        <img className='genre-a-image' src={movie.image} alt={movie.title} loading="lazy" sizes="50vw, (min-width: 480px) 34vw, (min-width: 600px) 26vw, (min-width: 1024px) 16vw, (min-width: 1280px) 16vw" />
+                                        <img className='genre-a-image' src={movie.poster} alt={movie.title} loading="lazy" sizes="50vw, (min-width: 480px) 34vw, (min-width: 600px) 26vw, (min-width: 1024px) 16vw, (min-width: 1280px) 16vw" />
                                     </a>
                                 </div>
                                 <div className='genre-poster-card-info'>
