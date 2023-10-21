@@ -29,7 +29,7 @@ export default function API() {
                             }
                             else if (key === 'user_rating' && (!value[key][0] || !value[key][1])) {
                                 if (!value[key][0]) {
-                                    params.push(`${key}=${value[key][1]},`)
+                                    params.push(`${key}=,${value[key][1]}`)
                                 } else {
                                     params.push(`${key}=${value[key][0]},`)
                                 }
